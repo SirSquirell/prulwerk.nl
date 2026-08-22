@@ -11,25 +11,57 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;900&display=swap">
+<script>
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
 <style>
+/* Palet. Elke waarde staat hier precies één keer; hieronder wordt hij alleen
+   toegewezen. Zo kan een modus niet stilletjes uit de pas gaan lopen. */
 :root{
-  --bg:#0B0B0F; --surface:#131318; --surface-2:#1A1A21; --line:#2A2A34;
-  --text:#F5F5F7; --text-2:#9A9AA3; --text-3:#6B6B76;
-  --accent:#C8F73A; --on-accent:#131608; --accent-line:#C8F73A;
-  --shadow:0 24px 60px rgb(0 0 0 / .45);
+  --d-bg:#0B0B0F; --d-surface:#131318; --d-surface-2:#1A1A21; --d-line:#2A2A34;
+  --d-text:#F5F5F7; --d-text-2:#9A9AA3; --d-text-3:#6B6B76;
+  --d-accent:#C8F73A; --d-accent-line:#C8F73A;
+  --d-shadow:0 24px 60px rgb(0 0 0 / .45);
+  --d-asteria-star:#F97038; --d-evenmatch-accent:#C8F73A;
+
+  --l-bg:#F7F7F5; --l-surface:#FFFFFF; --l-surface-2:#F1F1EE; --l-line:#E1E1DC;
+  --l-text:#14141A; --l-text-2:#5C5C66; --l-text-3:#8A8A93;
+  --l-accent:#B9E82A; --l-accent-line:#8FBB16;
+  --l-shadow:0 20px 50px rgb(20 20 26 / .10);
+  --l-asteria-star:#D9531E; --l-evenmatch-accent:currentColor;
+
+  /* Donker is de basis. */
+  --bg:var(--d-bg); --surface:var(--d-surface); --surface-2:var(--d-surface-2);
+  --line:var(--d-line); --text:var(--d-text); --text-2:var(--d-text-2);
+  --text-3:var(--d-text-3); --accent:var(--d-accent);
+  --accent-line:var(--d-accent-line); --shadow:var(--d-shadow);
+  --asteria-star:var(--d-asteria-star); --evenmatch-accent:var(--d-evenmatch-accent);
+
+  --on-accent:#131608;
   --r-card:18px;
-  --asteria-star:#F97038;
   --display:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
   --body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
+/* Systeemvoorkeur, behalve als de bezoeker expliciet donker heeft gekozen. */
 @media (prefers-color-scheme: light){
-  :root{
-    --bg:#F7F7F5; --surface:#FFFFFF; --surface-2:#F1F1EE; --line:#E1E1DC;
-    --text:#14141A; --text-2:#5C5C66; --text-3:#8A8A93;
-    --accent:#B9E82A; --on-accent:#131608; --accent-line:#8FBB16;
-    --shadow:0 20px 50px rgb(20 20 26 / .10);
-    --asteria-star:#D9531E;
+  :root:not([data-theme="dark"]){
+    --bg:var(--l-bg); --surface:var(--l-surface); --surface-2:var(--l-surface-2);
+    --line:var(--l-line); --text:var(--l-text); --text-2:var(--l-text-2);
+    --text-3:var(--l-text-3); --accent:var(--l-accent);
+    --accent-line:var(--l-accent-line); --shadow:var(--l-shadow);
+    --asteria-star:var(--l-asteria-star); --evenmatch-accent:var(--l-evenmatch-accent);
   }
+}
+/* Expliciete keuze wint, ook tegen een donkere systeemvoorkeur in. */
+:root[data-theme="light"]{
+  --bg:var(--l-bg); --surface:var(--l-surface); --surface-2:var(--l-surface-2);
+  --line:var(--l-line); --text:var(--l-text); --text-2:var(--l-text-2);
+  --text-3:var(--l-text-3); --accent:var(--l-accent);
+  --accent-line:var(--l-accent-line); --shadow:var(--l-shadow);
+  --asteria-star:var(--l-asteria-star); --evenmatch-accent:var(--l-evenmatch-accent);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -46,13 +78,15 @@ img{max-width:100%; display:block}
 .top{display:flex; align-items:center; justify-content:space-between; gap:16px; height:72px}
 .mark{font-family:var(--display); font-weight:900; font-size:19px; letter-spacing:-.02em; text-decoration:none}
 .mark span{color:var(--text-3); font-weight:700}
-.top a.ghostlink{
+.top .ghostlink{
+  font:inherit; background:none; cursor:pointer;
   font-size:14px; color:var(--text-2); text-decoration:none;
   padding:8px 14px; border:1px solid var(--line); border-radius:999px;
   transition:color .25s cubic-bezier(.16,1,.3,1), border-color .25s cubic-bezier(.16,1,.3,1);
   white-space:nowrap;
 }
-.top a.ghostlink:hover{color:var(--text); border-color:var(--text-3)}
+.top .ghostlink:hover{color:var(--text); border-color:var(--text-3)}
+.top .ghostlink:focus-visible{outline:2px solid var(--accent-line); outline-offset:3px}
 
 /* hero */
 .hero{padding:76px 0 64px}
@@ -89,9 +123,15 @@ img{max-width:100%; display:block}
   font-family:var(--display); font-weight:900; font-size:clamp(28px,3.6vw,38px);
   letter-spacing:-.03em; line-height:1.05; margin:0;
 }
-.project h2.lockup{display:flex; align-items:center; gap:.467em;
-  font-family:var(--body); font-weight:500; letter-spacing:.0867em; line-height:1}
-.project h2.lockup svg{height:1.333em; width:auto; flex:none}
+.project h2.lockup{display:flex; align-items:center; line-height:1}
+.project h2.lockup svg{width:auto; flex:none}
+/* Asteria: verhoudingen uit asteria-logo-dark.svg, gedeeld door font-size 30. */
+.project h2.asteria{gap:.467em; font-family:var(--body); font-weight:500; letter-spacing:.0867em}
+.project h2.asteria svg{height:1.333em}
+/* Even Match: verhoudingen uit Teamkiezeer index.html, gedeeld door font-size 22. */
+.project h2.evenmatch{gap:.409em; letter-spacing:-.03em}
+.project h2.evenmatch svg{height:1.182em}
+.project h2.evenmatch em{font-style:normal; color:var(--evenmatch-accent)}
 .project .lead{color:var(--text-2); margin:16px 0 0; max-width:52ch}
 .project + .project{margin-top:clamp(20px,3vw,28px)}
 .facts{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:10px}
@@ -141,7 +181,10 @@ footer a:hover{color:var(--text)}
 
 <header class="wrap top rise d1">
   <a class="mark" href="/">prulwerk<span>.nl</span></a>
-  <a class="ghostlink" href="https://github.com/SirSquirell" rel="me noopener">GitHub</a>
+  <span style="display:flex; align-items:center; gap:10px">
+    <button class="ghostlink" id="theme" type="button">Licht</button>
+    <a class="ghostlink" href="https://github.com/SirSquirell" rel="me noopener">GitHub</a>
+  </span>
 </header>
 
 <main>
@@ -158,7 +201,14 @@ footer a:hover{color:var(--text)}
              alt="Even Match op de telefoon: een grote Draw-knop met daaronder de regels voor sterren, teams en competities.">
       </div>
       <div>
-        <h2>Even Match</h2>
+        <h2 class="lockup evenmatch">
+          <svg viewBox="0 0 26 26" aria-hidden="true" focusable="false">
+            <rect x=".5" y=".5" width="25" height="25" rx="6.5" fill="#0F0F14" stroke="var(--line)"/>
+            <rect x="6" y="7.5" width="14" height="3.5" rx="2" fill="#C8F73A"/>
+            <rect x="6" y="15" width="14" height="3.5" rx="2" fill="#C8F73A"/>
+          </svg>
+          <span>EVEN<em>MATCH</em></span>
+        </h2>
         <p class="lead">Teamkiezer voor EA FC Kick-Off met zijn tweeën. Eén knop, en je krijgt twee teams met dezelfde sterren en een squad-rating die dicht genoeg bij elkaar ligt om er geen ruzie over te maken.</p>
         <ul class="facts">
           <li><b>Pool</b><span>705 teams, clubs en landenteams</span></li>
@@ -178,7 +228,7 @@ footer a:hover{color:var(--text)}
              alt="Asteria: de totale waarde van de rekening als groot bedrag, met ingelegd geld, resultaat en de dagkoers ernaast, en daaronder het waardeverloop over vijf jaar als grafiek.">
       </div>
       <div>
-        <h2 class="lockup">
+        <h2 class="lockup asteria">
           <svg viewBox="2 2 44 40" aria-hidden="true" focusable="false">
             <path d="M5 37 L15 27 L24 31 L33 19" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="5" cy="37" r="2.8" fill="currentColor"/>
@@ -210,5 +260,30 @@ footer a:hover{color:var(--text)}
   </div>
 </footer>
 
+<script>
+  (function () {
+    var root = document.documentElement, btn = document.getElementById("theme");
+    var sysLight = matchMedia("(prefers-color-scheme: light)");
+    function isLight() {
+      var t = root.dataset.theme;
+      return t ? t === "light" : sysLight.matches;
+    }
+    function label() {
+      var light = isLight();
+      // De knop noemt waar je naartoe gaat, niet waar je bent.
+      btn.textContent = light ? "Donker" : "Licht";
+      btn.setAttribute("aria-label", light ? "Donkere modus aanzetten" : "Lichte modus aanzetten");
+    }
+    btn.addEventListener("click", function () {
+      var next = isLight() ? "dark" : "light";
+      root.dataset.theme = next;
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      label();
+    });
+    // Volgt het systeem zolang er niets gekozen is.
+    sysLight.addEventListener("change", function () { if (!root.dataset.theme) label(); });
+    label();
+  })();
+</script>
 </body>
 </html>
