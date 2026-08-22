@@ -88,6 +88,7 @@ img{max-width:100%; display:block}
   letter-spacing:-.03em; line-height:1.05; margin:0;
 }
 .project .lead{color:var(--text-2); margin:16px 0 0; max-width:52ch}
+.project + .project{margin-top:clamp(20px,3vw,28px)}
 .facts{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:10px}
 .facts li{display:grid; grid-template-columns:104px 1fr; gap:14px; align-items:baseline; font-size:14.5px}
 .facts b{font-family:var(--display); font-weight:700; font-size:11.5px; letter-spacing:.09em;
@@ -162,6 +163,26 @@ footer a:hover{color:var(--text)}
         <div class="actions">
           <a class="btn btn-primary" href="https://evenmatch.prulwerk.nl">Open de app</a>
           <a class="btn btn-ghost" href="https://github.com/SirSquirell/Teamkiezeer" rel="noopener">Broncode</a>
+        </div>
+      </div>
+    </article>
+    <article class="project">
+      <div class="shot">
+        <img src="asteria.webp"
+             width="560" height="649" loading="lazy"
+             alt="Asteria: de totale waarde van de rekening als groot bedrag, met ingelegd geld, resultaat en de dagkoers ernaast, en daaronder het waardeverloop over vijf jaar als grafiek.">
+      </div>
+      <div>
+        <h2>Asteria</h2>
+        <p class="lead">Chrome-extensie die laat zien wat je DEGIRO-rekening elke dag waard was sinds je hem opende. Die grafiek geeft DEGIRO zelf niet. Alles blijft in je eigen browser, er is geen server en geen account.</p>
+        <ul class="facts">
+          <li><b>Historie</b><span>dagelijkse waarde, teruggerekend uit je eigen transacties</span></li>
+          <li><b>Privacy</b><span>alles lokaal, geen server, bedragen met &eacute;&eacute;n klik uit</span></li>
+          <li><b>Data</b><span>controleert zichzelf tegen het totaal van DEGIRO</span></li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://asteria.prulwerk.nl">Bekijk</a>
+          <a class="btn btn-ghost" href="https://github.com/SirSquirell/Claudiclaude" rel="noopener">Broncode</a>
         </div>
       </div>
     </article>
