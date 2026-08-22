@@ -4,11 +4,38 @@ Indexpagina van prulwerk.nl. Eén statisch bestand, geen buildstap, geen depende
 GitHub Pages serveert de root van `main`; een push is de deploy.
 
 ```
-index.html     alles: opmaak, tekst, en de Even Match-schermafdruk als data-URI
-asteria.webp   schermafdruk voor de Asteria-kaart, los bestand
-CNAME          prulwerk.nl
-.nojekyll      Jekyll overslaan
+index.html            alles: opmaak, tekst, en de Even Match-schermafdruk als data-URI
+asteria.webp          schermafdruk voor de Asteria-kaart, los bestand
+favicon.svg           merkteken donker, drie balken
+favicon-light.svg     merkteken licht
+favicon-32.png        vaste 32px, balken op hele pixels zodat de tab scherp blijft
+apple-touch-icon.png  180px vol vlak, iOS maskeert de hoeken zelf
+CNAME                 prulwerk.nl
+.nojekyll             Jekyll overslaan
 ```
+
+## Huisstijl
+
+Brandingsheet v1, augustus 2026. Donker is de basis.
+
+| Rol | Donker | Licht |
+|---|---|---|
+| Pagina | `#050505` | `#F4F4F1` |
+| Kaart | `#101010` | `#FFFFFF` |
+| Tekst | `#F2F2F0` | `#12120F` |
+| Accent | `#C9F531` | `#A6D400` |
+| Lijn en focus | `#C9F531` | `#718F00` |
+
+Lime is nooit een heel vlak: knoppen, onderstrepingen en de onderste balk in het icoon.
+In licht is de accentkleur een tint dieper, en de lijnvariant nog een tint dieper omdat
+een focusrand 3:1 moet halen op elk licht vlak, en de krapste is de tweede kaartlaag
+`#EDEDE9`; `#A6D400` komt daar niet verder dan 1,6:1. Het
+achtervoegsel `.nl` in de wordmark mag wel de volle accentkleur zijn, want een logotype
+valt buiten WCAG 1.4.3.
+
+Projecten houden hun eigen accent binnen hun eigen kaart: Even Match cyaan `#00D9F5`,
+Asteria oranje `#F97038`. Die twee staan los van het prulwerk-palet en gaan niet mee in
+een rebrand van de indexpagina.
 
 Een project toevoegen: kopieer een `<article class="project">` blok in `index.html` en
 vervang naam, omschrijving, de drie feiten en de twee links. Nieuwe schermafdrukken als
