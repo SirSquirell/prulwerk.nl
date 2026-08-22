@@ -18,6 +18,7 @@
   --accent:#C8F73A; --on-accent:#131608; --accent-line:#C8F73A;
   --shadow:0 24px 60px rgb(0 0 0 / .45);
   --r-card:18px;
+  --asteria-star:#F97038;
   --display:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
   --body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
@@ -27,6 +28,7 @@
     --text:#14141A; --text-2:#5C5C66; --text-3:#8A8A93;
     --accent:#B9E82A; --on-accent:#131608; --accent-line:#8FBB16;
     --shadow:0 20px 50px rgb(20 20 26 / .10);
+    --asteria-star:#D9531E;
   }
 }
 *{box-sizing:border-box}
@@ -87,6 +89,10 @@ img{max-width:100%; display:block}
   font-family:var(--display); font-weight:900; font-size:clamp(28px,3.6vw,38px);
   letter-spacing:-.03em; line-height:1.05; margin:0;
 }
+.project h2.lockup{display:flex; align-items:center; gap:9px;
+  font-family:var(--body); font-weight:500; font-size:19.5px;
+  letter-spacing:.0867em; line-height:1}
+.project h2.lockup svg{height:26px; width:auto; flex:none}
 .project .lead{color:var(--text-2); margin:16px 0 0; max-width:52ch}
 .project + .project{margin-top:clamp(20px,3vw,28px)}
 .facts{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:10px}
@@ -173,7 +179,16 @@ footer a:hover{color:var(--text)}
              alt="Asteria: de totale waarde van de rekening als groot bedrag, met ingelegd geld, resultaat en de dagkoers ernaast, en daaronder het waardeverloop over vijf jaar als grafiek.">
       </div>
       <div>
-        <h2>Asteria</h2>
+        <h2 class="lockup">
+          <svg viewBox="2 2 44 40" aria-hidden="true" focusable="false">
+            <path d="M5 37 L15 27 L24 31 L33 19" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="5" cy="37" r="2.8" fill="currentColor"/>
+            <circle cx="15" cy="27" r="2.8" fill="currentColor"/>
+            <circle cx="24" cy="31" r="2.8" fill="currentColor"/>
+            <path d="M35 4 C35.7 9.2 38.2 12.3 44 13 C38.2 13.7 35.7 16.8 35 22 C34.3 16.8 31.8 13.7 26 13 C31.8 12.3 34.3 9.2 35 4 Z" fill="var(--asteria-star)"/>
+          </svg>
+          ASTERIA
+        </h2>
         <p class="lead">Chrome-extensie die laat zien wat je DEGIRO-rekening elke dag waard was sinds je hem opende. Die grafiek geeft DEGIRO zelf niet. Alles blijft in je eigen browser, er is geen server en geen account.</p>
         <ul class="facts">
           <li><b>Historie</b><span>dagelijkse waarde, teruggerekend uit je eigen transacties</span></li>
