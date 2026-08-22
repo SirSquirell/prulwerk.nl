@@ -25,7 +25,7 @@
   --d-text:#F5F5F7; --d-text-2:#9A9AA3; --d-text-3:#6B6B76;
   --d-accent:#C8F73A; --d-accent-line:#C8F73A;
   --d-shadow:0 24px 60px rgb(0 0 0 / .45);
-  --d-asteria-star:#F97038; --d-evenmatch-accent:#C8F73A;
+  --d-asteria-star:#F97038; --d-evenmatch-accent:#00D9F5;
 
   --l-bg:#F7F7F5; --l-surface:#FFFFFF; --l-surface-2:#F1F1EE; --l-line:#E1E1DC;
   --l-text:#14141A; --l-text-2:#5C5C66; --l-text-3:#8A8A93;
@@ -135,10 +135,10 @@ img{max-width:100%; display:block}
 .project h2.asteria{font-family:var(--body); font-weight:500; letter-spacing:.0867em}
 .project h2.asteria a{gap:.467em}
 .project h2.asteria svg{height:1.333em}
-/* Even Match: verhoudingen uit Teamkiezeer index.html, gedeeld door font-size 22. */
-.project h2.evenmatch{letter-spacing:-.03em}
-.project h2.evenmatch a{gap:.409em}
-.project h2.evenmatch svg{height:1.182em}
+/* Even Match: verhoudingen uit Teamkiezeer v3, gedeeld door font-size 21. */
+.project h2.evenmatch{letter-spacing:-.035em; font-stretch:112%}
+.project h2.evenmatch a{gap:.476em}
+.project h2.evenmatch svg{height:1.429em}
 .project h2.evenmatch em{font-style:normal; color:var(--evenmatch-accent)}
 .project .lead{color:var(--text-2); margin:16px 0 0; max-width:52ch}
 .project + .project{margin-top:clamp(20px,3vw,28px)}
@@ -224,15 +224,15 @@ html.theme-anim .btn, html.theme-anim .top .ghostlink{
     <article class="project">
       <a class="shot" href="https://evenmatch.prulwerk.nl" aria-label="Even Match openen">
         <img src="evenmatch.webp"
-             width="386" height="376" fetchpriority="high" decoding="async"
-             alt="Even Match na een loting: Tondela tegen Padova, beide 2,5 sterren en een squad-rating van 67, met een verschil van 0.">
+             width="387" height="432" fetchpriority="high" decoding="async"
+             alt="Even Match na een loting: FC Utrecht tegen AZ, beide 3,5 sterren, ratings 71 en 73, met het oordeel net aan bij een verschil van 2.">
       </a>
       <div>
         <h2 class="lockup evenmatch"><a href="https://evenmatch.prulwerk.nl">
-          <svg viewBox="0 0 26 26" aria-hidden="true" focusable="false">
-            <rect x=".5" y=".5" width="25" height="25" rx="6.5" fill="#0F0F14" stroke="var(--line)"/>
-            <rect x="6" y="7.5" width="14" height="3.5" rx="2" fill="#C8F73A"/>
-            <rect x="6" y="15" width="14" height="3.5" rx="2" fill="#C8F73A"/>
+          <svg viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+            <rect x=".5" y=".5" width="29" height="29" rx="8.5" fill="#1B1F26" stroke="#2A3038"/>
+            <rect x="8.5" y="7.5" width="4" height="15" rx="2" fill="#FFFFFF"/>
+            <rect x="17.5" y="7.5" width="4" height="15" rx="2" fill="#FFFFFF"/>
           </svg>
           <span>EVEN<em>MATCH</em></span>
         </a></h2>
