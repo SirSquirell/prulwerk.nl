@@ -146,14 +146,14 @@ img{max-width:100%; display:block}
 .project .lead{color:var(--text-2); margin:16px 0 0; max-width:52ch}
 .project + .project{margin-top:clamp(20px,3vw,28px)}
 @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion: no-preference){
-  .project{transition:transform .2s cubic-bezier(.16,1,.3,1), border-color .2s}
+  .project{transition:transform .2s cubic-bezier(.16,1,.3,1), border-color .2s cubic-bezier(.16,1,.3,1)}
   .shot img{transition:transform .3s cubic-bezier(.16,1,.3,1)}
-  .project:has(a:hover){transform:translateY(-2px); border-color:var(--text-3)}
-  .project:has(a:hover) .shot img{transform:scale(1.015)}
-  .project:has(a:active){transform:translateY(0)}
+  .project:hover{transform:translateY(-2px); border-color:var(--text-3)}
+  .project:hover .shot img{transform:scale(1.015)}
+  .project:active{transform:translateY(0)}
 }
 @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion: reduce){
-  .project:has(a:hover){border-color:var(--text-3)}
+  .project:hover{border-color:var(--text-3)}
 }
 .facts{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:10px}
 .facts li{display:grid; grid-template-columns:104px 1fr; gap:14px; align-items:baseline; font-size:14.5px}
