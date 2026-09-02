@@ -23,8 +23,15 @@ Brandingsheet v1, augustus 2026. Donker is de basis.
 | Pagina | `#050505` | `#F4F4F1` |
 | Kaart | `#101010` | `#FFFFFF` |
 | Tekst | `#F2F2F0` | `#12120F` |
+| Tekst, label | `#83837E` | `#6B6B66` |
 | Accent | `#C9F531` | `#A6D400` |
 | Lijn en focus | `#C9F531` | `#718F00` |
+
+De labelkleur is de lichtste tekst die nog als tekst gebruikt wordt (feitlabels op 11,5px,
+de footer op 14px) en moet daarom 4,5:1 halen op elk vlak waar hij op staat, ook op de
+tweede kaartlaag. `#83837E` haalt 5,35 / 5,00 / 4,62 op pagina, kaart en `#191919`;
+`#6B6B66` haalt 4,86 / 5,36 / 4,56 op pagina, kaart en `#EDEDE9`. De oorspronkelijke
+`#6B6B67` en `#86867F` uit brandingsheet v1 bleven op 3,1 tot 3,8 steken.
 
 Lime is nooit een heel vlak: knoppen, onderstrepingen en de onderste balk in het icoon.
 In licht is de accentkleur een tint dieper, en de lijnvariant nog een tint dieper omdat
