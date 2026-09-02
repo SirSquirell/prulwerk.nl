@@ -11,9 +11,6 @@
 <link rel="icon" href="/favicon-light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;900&display=swap">
 <script>
   try {
     var t = localStorage.getItem("theme");
@@ -21,6 +18,16 @@
   } catch (e) {}
 </script>
 <style>
+/* Archivo, zelf gehost: alleen de twee gewichten die de pagina gebruikt, latin-subset.
+   Dezelfde statische instances als asteria.prulwerk.nl. Geen verzoek naar Google. */
+@font-face{
+  font-family:"Archivo"; font-style:normal; font-weight:700; font-display:swap;
+  src:url("fonts/archivo-700.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Archivo"; font-style:normal; font-weight:900; font-display:swap;
+  src:url("fonts/archivo-900.woff2") format("woff2");
+}
 /* Palet. Elke waarde staat hier precies één keer; hieronder wordt hij alleen
    toegewezen. Zo kan een modus niet stilletjes uit de pas gaan lopen. */
 :root{
