@@ -4,8 +4,11 @@ Indexpagina van prulwerk.nl. Eén statisch bestand, geen buildstap, geen depende
 GitHub Pages serveert de root van `main`; een push is de deploy.
 
 ```
-index.html            alles: opmaak, tekst, en de Even Match-schermafdruk als data-URI
-asteria.webp          schermafdruk voor de Asteria-kaart, los bestand
+index.html            alles: opmaak, tekst en script, zo'n 17 KB
+evenmatch.webp        schermafdruk voor de Even Match-kaart
+asteria.webp          schermafdruk voor de Asteria-kaart, 600px breed
+fonts/                Archivo 700 en 900, zelf gehost, latin-subset
+docs/BACKLOG.md       genummerde stories, PW-01 en verder
 favicon.svg           merkteken donker, drie balken
 favicon-light.svg     merkteken licht
 favicon-32.png        vaste 32px, balken op hele pixels zodat de tab scherp blijft
@@ -45,8 +48,10 @@ Asteria oranje `#F97038`. Die twee staan los van het prulwerk-palet en gaan niet
 een rebrand van de indexpagina.
 
 Een project toevoegen: kopieer een `<article class="project">` blok in `index.html` en
-vervang naam, omschrijving, de drie feiten en de twee links. Nieuwe schermafdrukken als
-los bestand in de repo, niet als data-URI; `index.html` is al 100 KB.
+vervang naam, omschrijving, de drie feiten en de twee links. De schermafdruk is een los
+`.webp`-bestand in de root, hoogstens 600px breed (de kaart wordt nooit breder dan 300px,
+dus dat is al twee keer de renderbreedte), met `width` en `height` op de echte maten.
+Niets als data-URI in `index.html`; dat bestand blijft zo rond de 17 KB.
 
 ## Domeinbeheer
 
@@ -82,6 +87,7 @@ Geen deploy-workflow; de root wordt rechtstreeks geserveerd.
 | `prulwerk.nl`, `www` | `SirSquirell/prulwerk.nl` (deze repo) |
 | `evenmatch.prulwerk.nl` | `SirSquirell/Teamkiezeer` |
 | `asteria.prulwerk.nl` | `SirSquirell/asteria.prulwerk.nl` |
+| `demo.asteria.prulwerk.nl` | `SirSquirell/Claudiclaude` |
 
 ### Wat je niet doet
 
