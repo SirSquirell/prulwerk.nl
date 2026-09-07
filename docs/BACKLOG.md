@@ -19,8 +19,8 @@ zonder test, ook als de test "met de hand, zo" is.
 branch die niemand meer ziet is waar werk twee keer gedaan wordt; dat is in Claudiclaude al
 eens met 23 branches misgegaan.
 
-**Scope.** De twee branches op de remote verwijderen. `claude/fable-5-tr3otb` gaat mee zodra
-de commits van 2 september op `main` staan. Niets aan `main` zelf.
+**Scope.** De branches op de remote verwijderen. Op 7 september gecontroleerd: ook
+`claude/fable-5-tr3otb` staat op 0 commits voor op `main` en kan mee. Niets aan `main` zelf.
 
 **Acceptatiecriteria.**
 - `git branch -r` toont alleen `origin/main`.
@@ -126,31 +126,31 @@ andersom, en controleer dat het gemeld wordt.
 
 ## PW-05 De Even Match-claim "elke ochtend" laten volgen uit de echte cron, of schrappen
 
-**Status:** open
+**Status:** gebouwd
 
 **Waarom.** De tekst op de kaart is op 2 september van "elke maandagochtend" naar "elke
 ochtend" gegaan omdat de cron in Teamkiezeer al eerder was veranderd en niemand het hier
 had bijgewerkt. Een feit dat uit een ander repo komt en met de hand wordt overgetikt,
 veroudert opnieuw.
 
-**Scope.** Een van twee, kies bewust:
-1. Een test (Node, geen dependencies, past bij een repo zonder buildstap) die
-   `.github/workflows/data.yml` uit `SirSquirell/Teamkiezeer` ophaalt, de `cron`-regel leest
-   en controleert dat hij dagelijks is zolang `index.html` "elke ochtend" zegt. Draait in
-   een GitHub Action op een schema, faalt hardop.
-2. Het feit vervangen door iets dat niet veroudert, bijvoorbeeld "data van EA FC, automatisch
-   bijgehouden", en de frequentie aan de Even Match-pagina zelf laten.
+**Scope.** Er waren twee opties:
+1. Een test (Node, geen dependencies) die `.github/workflows/data.yml` uit
+   `SirSquirell/Teamkiezeer` ophaalt, de `cron`-regel leest en controleert dat hij dagelijks
+   is zolang `index.html` "elke ochtend" zegt. Draait in een GitHub Action op een schema.
+2. Het feit vervangen door iets dat niet veroudert en de frequentie aan de Even Match-pagina
+   zelf laten.
 
-**Acceptatiecriteria.**
-- Bij optie 1: de check faalt als de cron in Teamkiezeer naar wekelijks gaat en `index.html`
-  nog "elke ochtend" zegt; slaagt nu.
-- Bij optie 2: nergens op de pagina staat nog een frequentie die uit een ander repo komt.
+Gekozen: optie 2, op 7 september. Het feit is nu "ratings uit EA FC, automatisch
+bijgehouden". Optie 1 zou een workflow zetten in een repo die er bewust geen heeft, voor
+één woord dat de bezoeker niets oplevert. "Dagelijkse waarde" op de Asteria-kaart blijft:
+dat beschrijft wat de extensie doet, niet hoe vaak een cron elders draait.
 
-**Afhankelijkheden.** Optie 1: leesrecht op de Teamkiezeer-repo (publiek, dus zonder token),
-en een workflow in deze repo, terwijl CLAUDE.md nu "geen deploy-workflow" zegt. Dat is een
-CI-check en geen deploy, maar zet het er wel bij.
+**Acceptatiecriteria.** Gehaald: nergens op de pagina staat nog een frequentie die uit een
+ander repo komt.
 
-**Test.** Optie 1 test zichzelf. Optie 2: lezen.
+**Afhankelijkheden.** Geen.
+
+**Test.** Lezen: `grep -n "ochtend\|maandag\|wekelijks" index.html` geeft niets terug.
 
 ---
 
