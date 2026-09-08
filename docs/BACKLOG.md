@@ -55,8 +55,9 @@ tekst, en moet naar 4,5 zodat het script de fout de volgende keer zelf vindt. De
 - `scripts/check-contrast.py` uit de skill meldt voor de labelkleur op alle zes vlakken
   minstens 4,5.
 
-**Afhankelijkheden.** Geen. asteria.prulwerk.nl gebruikt in licht `#6E6E69`; dat haalt op
-`#EDEDE9` maar 4,37 en kan bij die gelegenheid mee naar `#6B6B66`.
+**Afhankelijkheden.** Geen. asteria.prulwerk.nl is al over: AS-07 daar zette licht op
+`#66665F` (4,93 op `#EDEDE9`). Twee pagina's, twee waarden voor hetzelfde token; de skill
+kiest er straks één, en dan volgt de andere pagina.
 
 **Test.** De twee acceptatiecriteria, met de hand.
 
