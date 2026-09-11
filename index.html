@@ -150,6 +150,10 @@ img{max-width:100%; display:block}
 .project h2.evenmatch a{gap:.476em}
 .project h2.evenmatch svg{height:1.429em}
 .project h2.evenmatch em{font-style:normal; color:var(--evenmatch-accent)}
+/* Leto: merkteken uit leto.prulwerk.nl/favicon.svg, naam in de displayletter van de pagina.
+   Het paars zit alleen in het icoon, op zijn eigen donkere vlak, dus geen lichte variant. */
+.project h2.leto a{gap:.4em}
+.project h2.leto svg{height:1.15em}
 .project .lead{color:var(--text-2); margin:16px 0 0; max-width:52ch}
 .project + .project{margin-top:clamp(20px,3vw,28px)}
 @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion: no-preference){
@@ -284,6 +288,33 @@ html.theme-anim .btn, html.theme-anim .top .ghostlink{
         <div class="actions">
           <a class="btn btn-primary" href="https://asteria.prulwerk.nl">Bekijk</a>
           <a class="btn btn-ghost" href="https://github.com/SirSquirell/Claudiclaude" rel="noopener">Broncode</a>
+        </div>
+      </div>
+    </article>
+    <article class="project">
+      <a class="shot" href="https://leto.prulwerk.nl" aria-label="Leto bekijken">
+        <img src="leto.webp"
+             width="600" height="805" loading="lazy"
+             alt="Leto op demogegevens: de samenstelling over de hele historie, grootste positie 9,8%, zeven open posities, en daaronder het gestapelde waardeverloop per instrument met cash bovenop.">
+      </a>
+      <div>
+        <h2 class="lockup leto"><a href="https://leto.prulwerk.nl">
+          <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+            <rect width="512" height="512" rx="96" fill="#050505"/>
+            <path d="M368 320 A124 124 0 1 1 256 144" fill="none" stroke="#F2F2F0" stroke-width="50" stroke-linecap="round"/>
+            <path d="M256 144 A124 124 0 0 1 368 320" fill="none" stroke="#B79CFF" stroke-width="50" stroke-linecap="round"/>
+          </svg>
+          Leto
+        </a></h2>
+        <p class="lead">Chrome-extensie die laat zien wat je Trading 212-rekening elke dag waard was, hoeveel daarvan inleg is en hoe de weging van elke positie verschoof. Zusje van Asteria: alles blijft in je eigen browser, met een sleutel die alleen mag lezen.</p>
+        <ul class="facts">
+          <li><b>Bron</b><span>de offici&euml;le API van Trading 212, met je eigen leessleutel</span></li>
+          <li><b>Historie</b><span>dagelijkse waarde, inleg en samenstelling, teruggerekend uit je transacties</span></li>
+          <li><b>Privacy</b><span>alles lokaal, geen server, geen account</span></li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://leto.prulwerk.nl">Bekijk</a>
+          <a class="btn btn-ghost" href="https://leto.prulwerk.nl/demo/">Probeer de demo</a>
         </div>
       </div>
     </article>

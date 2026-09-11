@@ -7,6 +7,7 @@ GitHub Pages serveert de root van `main`; een push is de deploy.
 index.html            alles: opmaak, tekst en script, zo'n 17 KB
 evenmatch.webp        schermafdruk voor de Even Match-kaart
 asteria.webp          schermafdruk voor de Asteria-kaart, 600px breed
+leto.webp             schermafdruk voor de Leto-kaart, 600px breed, demo op gegenereerde data
 fonts/                Archivo 700 en 900, zelf gehost, latin-subset
 docs/BACKLOG.md       genummerde stories, PW-01 en verder
 favicon.svg           merkteken donker, drie balken
@@ -44,8 +45,9 @@ achtervoegsel `.nl` in de wordmark mag wel de volle accentkleur zijn, want een l
 valt buiten WCAG 1.4.3.
 
 Projecten houden hun eigen accent binnen hun eigen kaart: Even Match cyaan `#00D9F5`,
-Asteria oranje `#F97038`. Die twee staan los van het prulwerk-palet en gaan niet mee in
-een rebrand van de indexpagina.
+Asteria oranje `#F97038`, Leto paars `#B79CFF` (alleen in het merkteken, op zijn eigen
+donkere vlak). Die staan los van het prulwerk-palet en gaan niet mee in een rebrand van
+de indexpagina.
 
 Een project toevoegen: kopieer een `<article class="project">` blok in `index.html` en
 vervang naam, omschrijving, de drie feiten en de twee links. De schermafdruk is een los
@@ -88,6 +90,7 @@ Geen deploy-workflow; de root wordt rechtstreeks geserveerd.
 | `evenmatch.prulwerk.nl` | `SirSquirell/Teamkiezeer` |
 | `asteria.prulwerk.nl` | `SirSquirell/asteria.prulwerk.nl` |
 | `demo.asteria.prulwerk.nl` | `SirSquirell/Claudiclaude` |
+| `leto.prulwerk.nl` | `SirSquirell/leto.prulwerk.nl` (de extensie zelf staat in `SirSquirell/Trading212helper`, privé) |
 
 ### Wat je niet doet
 
