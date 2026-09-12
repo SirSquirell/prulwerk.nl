@@ -19,15 +19,32 @@ zonder test, ook als de test "met de hand, zo" is.
 branch die niemand meer ziet is waar werk twee keer gedaan wordt; dat is in Claudiclaude al
 eens met 23 branches misgegaan.
 
-**Scope.** De branches op de remote verwijderen. Op 7 september gecontroleerd: ook
-`claude/fable-5-tr3otb` staat op 0 commits voor op `main` en kan mee. Niets aan `main` zelf.
+**Scope.** De branches op de remote verwijderen. Op 12 september staan er vijf, allemaal
+zonder werk dat niet in `main` zit:
+
+| Branch | Commits voor op `main` |
+|---|---|
+| `claude/fable-5-tr3otb` | 0 |
+| `claude/go-rjnrlq` | 0 |
+| `claude/project-next-steps-8i73w4` | 0 |
+| `claude/skills-overview-gvlckf` | 0 |
+| `claude/keen-carson-b19o5j` | 1, maar `git diff` tegen `main` is leeg (squash-merge van PR #3) |
+
+Niets aan `main` zelf.
 
 **Acceptatiecriteria.**
 - `git branch -r` toont alleen `origin/main`.
-- Geen verlies: `git rev-list --count origin/main..<branch>` was 0 voor beide voordat ze
-  weggingen.
+- Geen verlies: elke branch stond op 0 commits voor op `main`, of gaf een lege `git diff`
+  tegen `main`, voordat hij wegging.
 
-**Afhankelijkheden.** Schrijfrecht op de repo; een sessie heeft dat niet.
+**Afhankelijkheden.** Dit is preciezer dan het eerder stond. Een sessie kan wél pushen en
+een PR mergen, maar géén ref verwijderen: `git push origin --delete` geeft HTTP 403 van
+GitHub, en de beveiliging van Claude Code blokkeert het daarnaast als destructieve
+git-actie. Het blijft dus een handeling van Mathijs, tenzij hij die twee dingen openzet.
+
+Twee dingen die het probleem structureel wegnemen en die hij één keer hoeft aan te zetten:
+Settings → General → "Automatically delete head branches" in de repo, en een
+Bash-permissieregel voor `git push origin --delete` in zijn instellingen.
 
 **Test.** `git fetch --prune && git branch -r` na afloop.
 
@@ -155,4 +172,41 @@ ander repo komt.
 
 ---
 
-Eerstvolgende vrije nummer: **PW-06**.
+## PW-06 Leto als derde project op de indexpagina
+
+**Status:** gebouwd
+
+**Waarom.** `leto.prulwerk.nl` stond live en was nergens vandaan te vinden. De indexpagina
+bestaat juist om dat te zijn: de plek waar de projecten bij elkaar staan.
+
+**Scope.** Een derde `<article class="project">` met het merkteken uit de favicon van de
+Leto-site, `leto.webp` (600x805, 25 KB, compositieweergave op demogegevens), en in
+CLAUDE.md de bestandslijst, het projectaccent `#B79CFF` en de hostnaam/repo-tabel. Buiten
+deze repo: `references/zone.md` in de skill `prulwerk-admin` met het CNAME-record en de
+subdomeinregel.
+
+**Besloten.** De tweede knop is "Probeer de demo" naar `/demo/` en niet "Broncode", zoals
+bij de andere twee kaarten. De extensie staat in `SirSquirell/Trading212helper` en die repo
+is privé, dus een Broncode-knop zet een bezoeker op een 404. Wordt die repo publiek, dan
+is het één link vervangen en volgt de kaart alsnog het patroon.
+
+**Openstaand, buiten deze repo.** Op leto.prulwerk.nl zelf wijzen zowel "Source" als de
+installatieknop naar diezelfde privérepo en zijn releases. Voor iedereen behalve Mathijs
+zijn dat dode links. Dat is een keuze over die site, niet over deze pagina, en hoort in het
+Leto-project thuis.
+
+**Acceptatiecriteria.** Gehaald op 12 september, PR #3:
+- `scrollWidth <= innerWidth` op 320, 375, 768, 1024 en 1600px, in licht en donker.
+- Nul consolefouten, nul mislukte verzoeken, geen host buiten de testserver.
+- Archivo 700 en 900 als `loaded`, geen ander gewicht gevraagd.
+- Alle drie de schermafdrukken geladen, `width` en `height` gelijk aan de echte maten.
+- Na de merge: `https://prulwerk.nl/` bevat `leto.webp` en dat bestand geeft een 200.
+
+**Afhankelijkheden.** Geen.
+
+**Test.** Headless Chromium via Playwright tegen een lokale server op de repo-root, plus een
+`curl` op de live pagina na de deploy.
+
+---
+
+Eerstvolgende vrije nummer: **PW-07**.
