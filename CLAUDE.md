@@ -8,6 +8,7 @@ index.html            alles: opmaak, tekst en script, zo'n 17 KB
 evenmatch.webp        schermafdruk voor de Even Match-kaart
 asteria.webp          schermafdruk voor de Asteria-kaart, 600px breed
 leto.webp             schermafdruk voor de Leto-kaart, 600px breed, demo op gegenereerde data
+prijswacht.webp       schermafdruk voor de Prijswacht-kaart, 600px breed, ontwerp met voorbeeldprijzen
 fonts/                Archivo 700 en 900, zelf gehost, latin-subset
 docs/BACKLOG.md       genummerde stories, PW-01 en verder
 favicon.svg           merkteken donker, drie balken
@@ -46,7 +47,7 @@ valt buiten WCAG 1.4.3.
 
 Projecten houden hun eigen accent binnen hun eigen kaart: Even Match cyaan `#00D9F5`,
 Asteria oranje `#F97038`, Leto paars `#B79CFF` (alleen in het merkteken, op zijn eigen
-donkere vlak). Die staan los van het prulwerk-palet en gaan niet mee in een rebrand van
+donkere vlak), Prijswacht blauw `#5B9DFF` (idem). Die staan los van het prulwerk-palet en gaan niet mee in een rebrand van
 de indexpagina.
 
 Een project toevoegen: kopieer een `<article class="project">` blok in `index.html` en
@@ -91,6 +92,7 @@ Geen deploy-workflow; de root wordt rechtstreeks geserveerd.
 | `asteria.prulwerk.nl` | `SirSquirell/asteria.prulwerk.nl` |
 | `demo.asteria.prulwerk.nl` | `SirSquirell/Claudiclaude` |
 | `leto.prulwerk.nl` | `SirSquirell/leto.prulwerk.nl` (de extensie zelf staat in `SirSquirell/Trading212helper`, privé) |
+| `prijs.prulwerk.nl` | `SirSquirell/prijs.prulwerk.nl` (frontend in de root, Worker in `worker/`) |
 
 ### Wat je niet doet
 
