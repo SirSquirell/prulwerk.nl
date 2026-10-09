@@ -10,7 +10,7 @@ zonder test, ook als de test "met de hand, zo" is.
 
 ---
 
-## PW-01 Twee gemergede `claude/*` branches verwijderen
+## PW-01 Gemergede `claude/*`-branches verwijderen
 
 **Status:** eigenaar
 
@@ -32,8 +32,11 @@ zonder werk dat niet in `main` zit:
 
 Niets aan `main` zelf.
 
+Niet verwijderen: `prijswacht-kaart`, dat is PR #5 (de vierde kaart) en staat nog open.
+Acceptatiecriterium wordt dus: `git branch -r` toont `origin/main` en wat nog een open PR heeft.
+
 **Acceptatiecriteria.**
-- `git branch -r` toont alleen `origin/main`.
+- `git branch -r` toont `origin/main` en alleen branches met een open PR.
 - Geen verlies: elke branch stond op 0 commits voor op `main`, of gaf een lege `git diff`
   tegen `main`, voordat hij wegging.
 
@@ -112,6 +115,7 @@ niet meer was.
 **Test.** Headless Chromium via Playwright tegen een lokale server op de repo-root; het
 script staat niet in de repo omdat het voor deze ronde is geschreven. Het meet
 `scrollWidth`, `document.fonts`, resource-hosts en consoleberichten per viewport.
+Sinds PW-07 staat het in `tools/check.mjs`.
 
 ---
 
@@ -127,7 +131,7 @@ achterloopt is gevaarlijker dan geen runbook.
 **Scope.** Kies een van twee: een checklistregel in de skill `prulwerk-admin` bij "subdomein
 toevoegen" die de tabel in deze repo noemt, of een klein script in `tools/` dat de CNAME's
 in de Cloudflare-zone vergelijkt met de tabel in CLAUDE.md en de verschillen print. Het
-script heeft de zone-id uit CLAUDE.md nodig en een token dat niet in de repo komt.
+script heeft de zone-id uit de skill nodig en een token dat niet in de repo komt.
 
 **Acceptatiecriteria.**
 - Een subdomein dat in Cloudflare staat maar niet in de tabel wordt gemeld (of is door de
@@ -168,7 +172,10 @@ ander repo komt.
 
 **Afhankelijkheden.** Geen.
 
-**Test.** Lezen: `grep -n "ochtend\|maandag\|wekelijks" index.html` geeft niets terug.
+**Aanvulling 9 oktober.** Ook het teamaantal op de Pool-regel is weg, om dezelfde reden: het
+verloopt bij de volgende game-editie.
+
+**Test.** Lezen: `grep -n "ochtend\|maandag\|wekelijks\|[0-9]\+ teams" index.html` geeft niets terug.
 
 ---
 
@@ -205,8 +212,74 @@ Leto-project thuis.
 **Afhankelijkheden.** Geen.
 
 **Test.** Headless Chromium via Playwright tegen een lokale server op de repo-root, plus een
-`curl` op de live pagina na de deploy.
+`curl` op de live pagina na de deploy. Sinds PW-07 staat het script in `tools/check.mjs`.
 
 ---
 
-Eerstvolgende vrije nummer: **PW-07**.
+## PW-07 De layout- en lettertypecontrole in de repo als `tools/check.mjs`
+
+**Status:** gebouwd
+
+**Waarom.** PW-03 en PW-06 hebben allebei hetzelfde Playwright-script met de hand geschreven
+en weer weggegooid; PR #5 (vierde kaart) zou het een derde keer nodig hebben. Een check die
+niet in de repo staat wordt bij de volgende kaart overgeslagen of anders gedaan.
+asteria.prulwerk.nl heeft hetzelfde patroon al in `tools/check-overflow.mjs`.
+
+**Scope.** Eén bestand, `tools/check.mjs`, zonder package.json of node_modules: het serveert
+de repo-root op 127.0.0.1 en meet in headless Chromium op 320, 375, 768, 1024 en 1600px,
+in licht en donker. Playwright komt uit een globale installatie (NODE_PATH of
+PLAYWRIGHT_MODULE), de browser uit PLAYWRIGHT_CHROMIUM of de standaardlocatie; ontbreekt
+dat, dan zegt het script wat er mist en stopt met code 2. CLAUDE.md en README verwijzen
+ernaar bij "Een project toevoegen".
+
+**Acceptatiecriteria.** Per viewport en thema:
+- `scrollWidth <= innerWidth`.
+- Lege console (geen error, warning of pageerror) en nul mislukte verzoeken.
+- Geen verzoek naar een host buiten de testserver.
+- `document.fonts` toont Archivo 700 en 900 als `loaded` en niets anders.
+- Elke `img` is geladen en `naturalWidth`/`naturalHeight` zijn gelijk aan de
+  `width`/`height`-attributen.
+- `/robots.txt`, `/sitemap.xml` en `/og.png` geven 200 (PW-08).
+- Negatief getest: een verkeerd `width`-attribuut op een schermafdruk geeft FOUT.
+
+**Afhankelijkheden.** Geen in de repo. Lokaal een globale Playwright met Chromium.
+
+**Test.** `node tools/check.mjs` eindigt met code 0: tien regels `ok` voor de pagina en drie
+voor de statische bestanden. Gedraaid op 9 oktober, groen.
+
+---
+
+## PW-08 Open Graph, canonical, robots.txt, sitemap.xml en og.png
+
+**Status:** gebouwd
+
+**Waarom.** Een gedeelde link naar prulwerk.nl toonde in WhatsApp, Slack of Discord alleen
+een kale titel: geen `og:`-tags, geen canonical, geen beeld, geen robots.txt of sitemap.
+asteria.prulwerk.nl heeft dat allemaal wel, en dit is de pagina die juist bestaat om te
+delen.
+
+**Scope.** In de `<head>`: canonical naar `https://prulwerk.nl/`, `og:type`, `og:url`,
+`og:site_name`, `og:locale`, `og:title`, `og:description` (letterlijk de bestaande meta
+description), `og:image` met maten en alt, en `twitter:card`. In de root: `robots.txt`
+(alles toegestaan, verwijzing naar de sitemap), `sitemap.xml` met één URL en een met de
+hand bijgehouden `lastmod`, en `og.png` van 1200x630 in het merkpalet: donker vlak,
+wordmark met lime `.nl`, de description, en een lime balk onderaan. Geen projectbeeld erin,
+die wisselen. Het beeld wordt gerenderd door `tools/make-og.mjs` uit de zelfgehoste
+Archivo, zodat het bij een rebrand opnieuw te maken is.
+
+**Acceptatiecriteria.**
+- `grep -c 'og:' index.html` geeft 10 (tien `og:`-regels); `canonical` en `twitter:card`
+  staan er één keer.
+- `og.png` is 1200x630, onder de 60 KB, en bevat geen tekst die niet ook op de pagina staat.
+- Geen nieuw verzoek naar een externe host; `tools/check.mjs` blijft groen.
+- Na de deploy: `https://prulwerk.nl/og.png`, `/robots.txt` en `/sitemap.xml` geven 200.
+
+**Afhankelijkheden.** PW-07 voor de controle. `lastmod` in de sitemap wordt met de hand
+bijgewerkt bij een inhoudelijke wijziging; er komt geen workflow voor.
+
+**Test.** `tools/check.mjs` groen, en `og.png` bekeken (32 KB). Na de merge een `curl -I` op
+de drie nieuwe bestanden.
+
+---
+
+Eerstvolgende vrije nummer: **PW-09**.

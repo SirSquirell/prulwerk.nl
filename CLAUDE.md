@@ -4,11 +4,16 @@ Indexpagina van prulwerk.nl. Eén statisch bestand, geen buildstap, geen depende
 GitHub Pages serveert de root van `main`; een push is de deploy.
 
 ```
-index.html            alles: opmaak, tekst en script, zo'n 17 KB
+index.html            alles: opmaak, tekst en script
 evenmatch.webp        schermafdruk voor de Even Match-kaart
 asteria.webp          schermafdruk voor de Asteria-kaart, 600px breed
 leto.webp             schermafdruk voor de Leto-kaart, 600px breed, demo op gegenereerde data
 fonts/                Archivo 700 en 900, zelf gehost, latin-subset
+og.png                Open Graph-beeld, 1200x630, gerenderd met tools/make-og.mjs
+robots.txt            alles toegestaan, verwijst naar de sitemap
+sitemap.xml           één URL; lastmod met de hand bij een inhoudelijke wijziging
+tools/check.mjs       meet overflow, console, externe hosts, fonts en afbeeldingsmaten in headless Chromium
+tools/make-og.mjs     rendert og.png uit de zelfgehoste Archivo
 docs/BACKLOG.md       genummerde stories, PW-01 en verder
 favicon.svg           merkteken donker, drie balken
 favicon-light.svg     merkteken licht
@@ -53,7 +58,9 @@ Een project toevoegen: kopieer een `<article class="project">` blok in `index.ht
 vervang naam, omschrijving, de drie feiten en de twee links. De schermafdruk is een los
 `.webp`-bestand in de root, hoogstens 600px breed (de kaart wordt nooit breder dan 300px,
 dus dat is al twee keer de renderbreedte), met `width` en `height` op de echte maten.
-Niets als data-URI in `index.html`; dat bestand blijft zo rond de 17 KB.
+Niets als data-URI in `index.html`; de kaartbeelden blijven losse bestanden.
+Draai daarna `node tools/check.mjs` (Playwright globaal, zie het kopcommentaar van het script);
+de uitkomst hoort in de story onder Test.
 
 ## Domeinbeheer
 
@@ -67,15 +74,16 @@ samenvatting zodat een sessie zonder die skill niet blind is, geen vervanging er
 
 | Wat | Waarde |
 |---|---|
-| Registratie | Vimexx, klantaccount 47260 |
+| Registratie | Vimexx; klantnummer staat in de skill |
 | DNS | Cloudflare, Free plan |
-| Cloudflare account-id | `7b1b25c1f0b0a98c7f77a7a6a08d868b` |
-| Cloudflare zone-id | `cc7585105a1a2c6ac59da0fc192ed6ab` |
+| Cloudflare account- en zone-id | in de skill `prulwerk-admin`, `references/zone.md` en `references/environment.md` |
 | Nameservers | `jocelyn.ns.cloudflare.com`, `lynn.ns.cloudflare.com` |
 | Nameserverset bij Vimexx | `(3089469) Cloudflare`, **niet** als accountstandaard |
 | GitHub-account | `SirSquirell` |
 | Pages-doel voor CNAME's | `sirsquirell.github.io` |
-| Hostingpakket | 494480 bij Vimexx, **niet opzeggen**, de MX hangt eraan |
+| Hostingpakket | bij Vimexx, **niet opzeggen**, de MX hangt eraan; pakketnummer in de skill |
+
+Account-, pakket- en zone-id's staan bewust niet in deze repo: hij is publiek en Pages serveert ook dit bestand.
 
 ### Elk subdomein is een eigen repo
 
