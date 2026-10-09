@@ -7,7 +7,7 @@
 // og.png die een 200 geven. Draai dit na elke wijziging aan opmaak, kaarten of
 // afbeeldingen:
 //
-//   NODE_PATH=/opt/node22/lib/node_modules node tools/check.mjs
+//   NODE_PATH=$(npm root -g) node tools/check.mjs
 //
 // De repo wordt over een lokale http-server geserveerd, niet via file://, zodat
 // je dezelfde pagina test als die GitHub Pages serveert.

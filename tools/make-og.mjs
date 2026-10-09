@@ -3,7 +3,7 @@
 // Rendert og.png (1200x630) uit de zelfgehoste Archivo en het merkpalet, zodat het
 // beeld bij een rebrand opnieuw te maken is. Geen projectbeelden erin: die wisselen.
 //
-//   NODE_PATH=/opt/node22/lib/node_modules node tools/make-og.mjs
+//   NODE_PATH=$(npm root -g) node tools/make-og.mjs
 //
 // Playwright komt uit een globale installatie, zie tools/check.mjs.
 
