@@ -284,7 +284,9 @@ de drie nieuwe bestanden.
 
 ## PW-09 Vijfde kaart: klantwerk, anoniem
 
-**Status:** gebouwd
+**Status:** eigenaar. De kaart is gebouwd op de branch `claude/charming-edison-qtea2g` en
+staat onder voorwaarden (`docs/PORTFOLIO.md`). Hij gaat naar `main` zodra Mathijs het ene
+open punt daar heeft afgehandeld; daarna wordt dit **gebouwd**.
 
 **Waarom.** Het eerste project hier dat voor iemand anders is gebouwd, en juist dat hoort
 op een portfolio. De eerste versie van de kaart noemde de klant bij naam, met haar
@@ -295,7 +297,7 @@ besloot op 11 november: anoniem.
 zonder beeldmerk, zonder knoppen en met een schermafdruk die geen link is.
 `klantwerk.webp` (600x840, 27 KB) is de homepage van het project in donker op
 telefoonbreedte, met de demobalk, de navigatie en het regiolabel verborgen en afgekapt
-boven de prijzen. In CLAUDE.md de bestandslijst en de regel voor anoniem klantwerk.
+boven de prijzen. In CLAUDE.md de bestandslijst.
 `lastmod` in de sitemap naar 11 november.
 
 **Besloten.**
@@ -304,7 +306,11 @@ boven de prijzen. In CLAUDE.md de bestandslijst en de regel voor anoniem klantwe
   is er om de eigenaar haar eigen site te laten zien.
 - Het subdomein van de demo staat om dezelfde reden niet in de hostnaam/repo-tabel in
   CLAUDE.md. Dat is een bewuste uitzondering op PW-04.
-- Het feit "Talen" noemt het aantal, niet welke.
+- Het feit "Talen" noemt het aantal, niet welke. De alt-tekst omschrijft de schermafdruk
+  zonder de kop van de site te citeren.
+- Bij de kaart was eerst een algemene regel voor anoniem klantwerk aan CLAUDE.md en aan de
+  toets van de portfolio-manager toegevoegd. Die is er weer uit: het besluit ging over
+  deze ene kaart, en wie een kaart bouwt hoort de toets niet te herschrijven.
 - De eerste versie had een knop "Probeer te boeken". Die was fout: wie in de demo boekt
   met een eigen adres laat echte gegevens achter. Met een kaart zonder link speelt dat niet
   meer.
@@ -408,12 +414,13 @@ een besluit van Mathijs, niet van een sessie.
   installeren) en "Probeer de demo" is de hoofdknop.
 - Prijswacht: tekst rechtzetten, kaart blijft. De lead en de feiten noemen alleen wat nu
   werkt, "Komt nog" zegt wat er nog niet is, en Broncode is de hoofdknop. Daarmee is de
-  blokkade "privé zonder demo" opgeheven.
+  blokkade "privé zonder demo" opgeheven: de schermafdruk, de titel en de knop "Bekijk
+  Prijswacht" gaan nog steeds naar het inlogscherm van een noindex-pagina.
 - Even Match: tekst rechtzetten. Twee tegen twee, en de app zegt hoe ver de squad-ratings
   uit elkaar liggen in plaats van dat ze dicht bij elkaar liggen. De clublogo's in de
   schermafdruk zijn aanvaard: het is een schermafdruk van de app, de repo zelf commit ze
   niet.
-- Vijfde kaart: anoniem (PW-09).
+- Vijfde kaart: anoniem (PW-09). Die staat nog op een branch.
 
 **Nog open.** De live adressen van alle vijf zijn nooit nagelopen: vanuit de cloudsessie
 waren ze niet bereikbaar. Dat kan alleen in een browser of een sessie die erbij kan.
@@ -424,8 +431,9 @@ waren ze niet bereikbaar. Dat kan alleen in een browser of een sessie die erbij 
 
 **Afhankelijkheden.** PW-11.
 
-**Test.** `node tools/check.mjs` na de wijzigingen, groen. De nieuwe teksten zijn door de
-portfolio-manager nagelezen tegen de repo's van de projecten.
+**Test.** `node tools/check.mjs` na de wijzigingen, groen. De portfolio-manager heeft de
+drie nieuwe teksten in een tweede ronde nagelezen tegen de repo's van de projecten: alle
+drie kloppen.
 
 ---
 

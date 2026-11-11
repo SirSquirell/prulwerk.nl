@@ -76,11 +76,6 @@ in `docs/PORTFOLIO.md`; werk dat bij in dezelfde commit als de kaart. ONDER VOOR
 een open "eerst"-voorwaarde en BLOKKEREN gaan niet naar `main`. Alleen Mathijs heft een
 blokkade op.
 
-Werk voor een ander zonder akkoord van die ander komt er alleen anoniem op: geen naam,
-logo, regio, tarief of link, ook niet in de schermafdruk, de bestandsnaam of deze repo. De
-kaart "Klantwerk: schoonmaak" is het voorbeeld. Zo'n kaart heeft geen knoppen en de
-schermafdruk is geen link.
-
 Draait de sessie vanuit een andere repo, dan bestaat de agent daar niet als subagent. Geef
 dan een losse agent de tekst van het agentbestand mee, of loop de toets zelf langs en zet
 in het register dat het geen onafhankelijk oordeel is.

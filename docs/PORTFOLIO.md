@@ -6,82 +6,82 @@ ervoor staan. Het oordeel komt van de agent `portfolio-manager`
 commit. De punten verwijzen naar de toets in dat bestand.
 
 Een kaart gaat niet naar `main` zonder rij met TOELATEN, of met ONDER VOORWAARDEN waarvan
-elke "eerst"-voorwaarde is afgevinkt. Een BLOKKEREN heft alleen Mathijs op. Drie kaarten
-stonden al live voordat de portfolio-manager bestond en zijn bij de eerste ronde
-geblokkeerd of onder voorwaarden gezet; die blijven staan tot Mathijs per kaart besluit
-(PW-12).
+elke "eerst"-voorwaarde is afgevinkt. Een BLOKKEREN heft alleen Mathijs op, en dat staat
+hier dan met datum.
 
 Deze repo is publiek en Pages serveert ook dit bestand: geen namen van personen, en werk
-voor een ander staat hier zonder naam tot die ander akkoord is.
+voor een ander staat hier zonder naam.
 
-| Project | Soort | Oordeel, 11 nov 2026 | Link heen | Link terug |
+| Project | Soort | Stand, 11 nov 2026 | Link heen | Link terug |
 |---|---|---|---|---|
-| Even Match | eigen | ONDER VOORWAARDEN | `evenmatch.prulwerk.nl` | footer, sinds 0.04.3 |
-| Asteria | eigen | ONDER VOORWAARDEN | `asteria.prulwerk.nl` | wordmark in de kop, ook in de handleiding |
-| Leto | eigen | BLOKKEREN, staat nog live | `leto.prulwerk.nl` | wordmark in de kop en footer |
-| Prijswacht | eigen | BLOKKEREN, staat nog live | `prijs.prulwerk.nl` | wordmark rechtsboven |
-| Vijfde kaart | voor een ander | BLOKKEREN, staat op een branch | demo onder prulwerk.nl | geen, hoort ook niet op de echte site (punt 9) |
+| Even Match | eigen | ONDER VOORWAARDEN: live nalopen | `evenmatch.prulwerk.nl` | footer, sinds 0.04.3 |
+| Asteria | eigen | ONDER VOORWAARDEN: live nalopen | `asteria.prulwerk.nl` | wordmark in de kop, ook in de handleiding |
+| Leto | eigen | blokkade opgeheven door Mathijs, tekst klopt | `leto.prulwerk.nl`, hoofdknop naar de demo | wordmark in de kop en footer |
+| Prijswacht | eigen | blokkade opgeheven door Mathijs, tekst klopt | `prijs.prulwerk.nl` (inlogscherm), hoofdknop Broncode | wordmark rechtsboven |
+| Klantwerk: schoonmaak | voor een ander, anoniem | ONDER VOORWAARDEN, staat op een branch | geen | geen, hoort ook niet op de echte site (punt 9) |
 
-## Eerste ronde, 11 november 2026
+De agent is twee keer langs geweest, allebei op 11 november en allebei op de repo's van de
+projecten. De live adressen waren vanuit de sessie niet bereikbaar, dus punt 1 en 2 zijn
+nergens live gezien. `tools/check.mjs` is door de bouwende sessie gedraaid en groen
+(punt 7).
 
-Door de agent zelf, op de repo's. De live adressen waren vanuit de sessie niet bereikbaar,
-dus punt 1 en 2 zijn nergens live gezien. `tools/check.mjs` is door de bouwende sessie
-gedraaid en groen (punt 7).
+## Even Match
 
-### Even Match: ONDER VOORWAARDEN
-
-- [ ] De kaarttekst belooft meer dan de app doet (punt 6). "Met zijn tweeën": de app is
-  voor twee tegen twee. "Een squad-rating die dicht genoeg bij elkaar ligt": de rating
-  filtert niet, alleen de sterren, en het oordeel kan "scheef" zijn. Besluit bij Mathijs
-  (PW-12).
-- [ ] `evenmatch.webp` toont twee clublogo's, terwijl de repo ze bewust nooit commit
-  (punt 5). Vervangen of aanvaarden en hier vastleggen: Mathijs.
+- [x] Tekst rechtgezet, besluit Mathijs: twee tegen twee, en de app zegt hoe ver de
+  squad-ratings uit elkaar liggen. De rating filtert niet, alleen de sterren. Door de agent
+  nagelezen: klopt.
+- [x] De twee clublogo's in `evenmatch.webp` zijn door Mathijs aanvaard: het is een
+  schermafdruk van de app, de repo zelf commit ze niet (punt 5).
 - [x] Link terug (punt 8): 0.04.3 staat op `main` van de Even Match-repo.
 - [ ] Live nalopen (punt 1 en 2).
 
-### Asteria: ONDER VOORWAARDEN
+## Asteria
 
 - [ ] Live nalopen (punt 1 en 2). In de repo is niets gevonden wat tegenhoudt.
-- Suggestie: de alt-tekst van de schermafdruk zegt niet dat het demogegevens zijn.
+- Suggestie van de agent: de alt-tekst van de schermafdruk zegt niet dat het demogegevens
+  zijn.
 
-### Leto: BLOKKEREN
+## Leto
 
-De kaart beveelt een extensie aan die niemand kan installeren, en zegt dat niet. De
-Leto-site zelf is er eerlijk over: de installatieknop staat uit en de demo is alles wat de
-pagina biedt (punt 2, 3 en 6).
+Eerste ronde: BLOKKEREN. De kaart beval een extensie aan die niemand kan installeren en
+zei dat niet, terwijl de Leto-site er zelf eerlijk over is.
 
-Opnieuw aankloppen: als de extensie vrij is, of met een kaart die zegt dat hij nog niet te
-installeren is, de demo als hoofdknop en een Status-regel. De dode links naar de privérepo
-uit PW-06 zijn er niet meer.
-
-### Prijswacht: BLOKKEREN
-
-Privé, achter inlog, zonder demo (punt 1 en 2), en de kaart noemt functies die nog niet
-gebouwd zijn (punt 6): meldingen bij een prijsdaling, het oordeel op 90 dagen historie, en
-bol in de winkellijst terwijl bol een 403 geeft. Toevoegen gaat met een link, niet door te
-zeggen welk product je wilt. De pagina is noindex en volgens de eigen brief geen
-landingspagina; de kaart maakt hem toch vindbaar (punt 10).
-
-Opnieuw aankloppen: met een publieke demo op voorbeeldgegevens en een kaart die alleen
-noemt wat werkt. De knop Broncode werkt wel: de repo is publiek.
-
-### Vijfde kaart, werk voor een ander: BLOKKEREN
-
-Strenger dan het eerste oordeel van de sessie die de kaart bouwde. Die las punt 4 als ok en
-zette er een knop "Probeer te boeken" op; beide waren fout.
-
-- [ ] **Eerst:** akkoord van de eigenaar, met datum, voor haar handelsnaam en beeldmerk op
-  een geïndexeerde pagina, en voor haar echte diensten en tarieven op een publieke demo
-  (punt 5 en 10). De demo is noindex en bedoeld om aan haar te laten zien. Regelen:
-  Mathijs. Tot dan staat de naam nergens op `main` van deze repo.
-- [ ] **Eerst:** in de demo een zichtbare aanwijzing om geen echte gegevens in te vullen
-  (punt 4). Wie daar boekt met een eigen adres laat naam, adres en telefoon achter, en
-  eindigt bij "check je inbox" terwijl er geen mail weggaat. Wijziging in de repo van dat
-  project.
-- [x] De knop "Probeer te boeken" is van de kaart af.
-- [x] De Status-regel zegt wat verzonnen is: klanten en afspraken. Diensten en tarieven
-  zijn dat niet.
+- [x] Besluit Mathijs: kaart eerlijk maken. De derde feitregel is Status (af, maar nog niet
+  te installeren) en "Probeer de demo" is de hoofdknop. Door de agent nagelezen: klopt.
 - [ ] Live nalopen (punt 1 en 2).
 
-Zonder akkoord kan het alleen met een demo en een kaart onder een verzonnen naam en
-verzonnen tarieven.
+## Prijswacht
+
+Eerste ronde: BLOKKEREN. Privé, achter inlog, zonder demo (punt 1 en 2); de kaart noemde
+functies die nog niet gebouwd zijn (punt 6); en de pagina is noindex terwijl de kaart hem
+vindbaar maakt (punt 10).
+
+- [x] Besluit Mathijs: tekst rechtzetten, de kaart blijft. De lead en de feiten noemen
+  alleen wat nu werkt, "Komt nog" zegt wat er nog niet is, en Broncode is de hoofdknop.
+  Door de agent nagelezen: de tekst klopt.
+- [x] Mathijs heeft daarmee ook de blokkade op punt 1 en 10 opgeheven: de schermafdruk, de
+  titel en de knop "Bekijk Prijswacht" gaan nog steeds naar het inlogscherm. De kaart zegt
+  dat erbij.
+- Niet nagegaan: of bol nog blokkeert en of de Worker nog verzamelt. De bron is de status
+  van het project van 9 oktober.
+- [ ] Live nalopen (punt 1 en 2).
+
+## Klantwerk: schoonmaak
+
+Eerste ronde: BLOKKEREN, op een versie met de naam en het beeldmerk van de klant en een
+link naar haar demo. Besluit Mathijs daarna, letterlijk: "maak maar anoniem en de pagina
+zelf hoeft niet indexed te zijn". Uitgevoerd als een kaart zonder naam, beeldmerk, regio,
+tarief en link.
+
+Tweede ronde: ONDER VOORWAARDEN. Kaart en werkmap zijn anoniem en de beweringen kloppen.
+
+- [ ] **Eerst:** één open punt bij Mathijs, niet in deze publieke repo beschreven.
+- [x] De bouwer had in dezelfde commit de toets en CLAUDE.md verruimd met een algemene
+  regel voor anoniem klantwerk. Dat was breder dan het besluit over deze ene kaart en is
+  er weer uit.
+- [x] De alt-tekst omschrijft de schermafdruk zonder de kop van de site te citeren, en
+  Status zegt dat de site nog niet live is.
+- Opmerking van de agent, geen blokkade: zonder link kan een bezoeker er niets mee, het is
+  een referentie en geen "ding dat af is". Wat hem zou redden is een demo onder een
+  verzonnen naam en verzonnen tarieven als knop. Dat is de keuze van Mathijs.
+- Punt 5 rust op het besluit van Mathijs, niet op akkoord van de klant.
