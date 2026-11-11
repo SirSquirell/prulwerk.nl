@@ -282,14 +282,48 @@ de drie nieuwe bestanden.
 
 ---
 
-## PW-09 Vijfde kaart: werk voor een ander
+## PW-09 Vijfde kaart: klantwerk, anoniem
 
-**Status:** eigenaar. De kaart is gebouwd op de branch `claude/charming-edison-qtea2g` en
-door de portfolio-manager geblokkeerd (PW-11, `docs/PORTFOLIO.md`). Hij gaat pas naar
-`main` als de twee "eerst"-voorwaarden daar zijn afgevinkt.
+**Status:** gebouwd
 
-De story zelf, met scope, besluiten en test, staat op die branch en komt mee met de kaart.
-Tot er akkoord is van de eigenaar staat haar naam niet op `main`: de repo is publiek.
+**Waarom.** Het eerste project hier dat voor iemand anders is gebouwd, en juist dat hoort
+op een portfolio. De eerste versie van de kaart noemde de klant bij naam, met haar
+beeldmerk en een link naar de demo. De portfolio-manager hield die tegen (PW-11) en Mathijs
+besloot op 11 november: anoniem.
+
+**Scope.** Een vijfde `<article class="project">` met de titel "Klantwerk: schoonmaak",
+zonder beeldmerk, zonder knoppen en met een schermafdruk die geen link is.
+`klantwerk.webp` (600x840, 27 KB) is de homepage van het project in donker op
+telefoonbreedte, met de demobalk, de navigatie en het regiolabel verborgen en afgekapt
+boven de prijzen. In CLAUDE.md de bestandslijst en de regel voor anoniem klantwerk.
+`lastmod` in de sitemap naar 11 november.
+
+**Besloten.**
+- Anoniem betekent hier: de kaart linkt nergens heen. Het alternatief was de demo zelf
+  ombouwen naar een verzonnen naam en verzonnen tarieven. Dat is niet gedaan, want de demo
+  is er om de eigenaar haar eigen site te laten zien.
+- Het subdomein van de demo staat om dezelfde reden niet in de hostnaam/repo-tabel in
+  CLAUDE.md. Dat is een bewuste uitzondering op PW-04.
+- Het feit "Talen" noemt het aantal, niet welke.
+- De eerste versie had een knop "Probeer te boeken". Die was fout: wie in de demo boekt
+  met een eigen adres laat echte gegevens achter. Met een kaart zonder link speelt dat niet
+  meer.
+- De schermafdruk komt van een lokale run van het project, niet van de live demo: die was
+  vanuit de cloudsessie niet bereikbaar.
+
+**Acceptatiecriteria.**
+- Nergens in deze repo staat de naam van de klant of het adres van de demo:
+  `git grep -i` op de naam geeft niets terug.
+- In de schermafdruk staat geen naam, beeldmerk, regio of bedrag.
+- De kaart bevat geen `<a>`.
+- `scrollWidth <= innerWidth` op 320, 375, 768, 1024 en 1600px, in licht en donker; nul
+  consolefouten; alle vijf de schermafdrukken geladen op hun echte maten.
+
+**Afhankelijkheden.** PW-10 en PW-11: het oordeel van de portfolio-manager.
+
+**Test.** `node tools/check.mjs` op 11 november: tien regels `ok` voor de pagina en drie
+voor de statische bestanden. De kaart bekeken op 1280px in donker en op 375px in licht. De
+schermafdruk met het oog nagelopen op naam, beeldmerk, regio en bedragen.
 
 ---
 
@@ -363,20 +397,26 @@ die waren vanuit de cloudsessie niet bereikbaar.
 
 ## PW-12 Besluiten na de eerste ronde
 
-**Status:** eigenaar
+**Status:** gebouwd
 
-**Waarom.** De portfolio-manager heeft twee kaarten geblokkeerd die al live staan en bij
-een derde gezegd dat de tekst niet klopt. Een kaart van de pagina halen of herschrijven is
+**Waarom.** De portfolio-manager had twee kaarten geblokkeerd die al live stonden en bij
+een derde gezegd dat de tekst niet klopte. Een kaart van de pagina halen of herschrijven is
 een besluit van Mathijs, niet van een sessie.
 
-**Scope.** Per kaart één besluit:
-- Leto: de kaart aanpassen (nog niet te installeren, demo als hoofdknop, Status-regel) of
-  weghalen.
-- Prijswacht: weghalen tot er een publieke demo is, of de blokkade opheffen met een kaart
-  die alleen noemt wat werkt en Broncode als hoofdknop.
-- Even Match: de tekst rechtzetten (twee tegen twee; de rating filtert niet), en de
-  clublogo's in de schermafdruk aanvaarden of vervangen.
-- Alle vijf: het live adres nalopen in een sessie of browser die erbij kan.
+**Besloten door Mathijs, 11 november 2026.**
+- Leto: kaart eerlijk maken. De derde feitregel is nu Status (af, maar nog niet te
+  installeren) en "Probeer de demo" is de hoofdknop.
+- Prijswacht: tekst rechtzetten, kaart blijft. De lead en de feiten noemen alleen wat nu
+  werkt, "Komt nog" zegt wat er nog niet is, en Broncode is de hoofdknop. Daarmee is de
+  blokkade "privé zonder demo" opgeheven.
+- Even Match: tekst rechtzetten. Twee tegen twee, en de app zegt hoe ver de squad-ratings
+  uit elkaar liggen in plaats van dat ze dicht bij elkaar liggen. De clublogo's in de
+  schermafdruk zijn aanvaard: het is een schermafdruk van de app, de repo zelf commit ze
+  niet.
+- Vijfde kaart: anoniem (PW-09).
+
+**Nog open.** De live adressen van alle vijf zijn nooit nagelopen: vanuit de cloudsessie
+waren ze niet bereikbaar. Dat kan alleen in een browser of een sessie die erbij kan.
 
 **Acceptatiecriteria.**
 - Bij elke kaart in `docs/PORTFOLIO.md` staat wat Mathijs besloot, met datum.
@@ -384,7 +424,8 @@ een besluit van Mathijs, niet van een sessie.
 
 **Afhankelijkheden.** PW-11.
 
-**Test.** `node tools/check.mjs` na elke kaartwijziging, en het register nalezen.
+**Test.** `node tools/check.mjs` na de wijzigingen, groen. De nieuwe teksten zijn door de
+portfolio-manager nagelezen tegen de repo's van de projecten.
 
 ---
 

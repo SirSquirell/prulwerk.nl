@@ -9,6 +9,7 @@ evenmatch.webp        schermafdruk voor de Even Match-kaart
 asteria.webp          schermafdruk voor de Asteria-kaart, 600px breed
 leto.webp             schermafdruk voor de Leto-kaart, 600px breed, demo op gegenereerde data
 prijswacht.webp       schermafdruk voor de Prijswacht-kaart, 600px breed, ontwerp met voorbeeldprijzen
+klantwerk.webp        schermafdruk voor de kaart Klantwerk: schoonmaak, 600px breed, zonder naam, regio en prijzen
 fonts/                Archivo 700 en 900, zelf gehost, latin-subset
 og.png                Open Graph-beeld, 1200x630, gerenderd met tools/make-og.mjs
 robots.txt            alles toegestaan, verwijst naar de sitemap
@@ -74,6 +75,11 @@ werk, eerlijk), of de link terug klopt, en hij kan blokkeren. Het oordeel staat 
 in `docs/PORTFOLIO.md`; werk dat bij in dezelfde commit als de kaart. ONDER VOORWAARDEN met
 een open "eerst"-voorwaarde en BLOKKEREN gaan niet naar `main`. Alleen Mathijs heft een
 blokkade op.
+
+Werk voor een ander zonder akkoord van die ander komt er alleen anoniem op: geen naam,
+logo, regio, tarief of link, ook niet in de schermafdruk, de bestandsnaam of deze repo. De
+kaart "Klantwerk: schoonmaak" is het voorbeeld. Zo'n kaart heeft geen knoppen en de
+schermafdruk is geen link.
 
 Draait de sessie vanuit een andere repo, dan bestaat de agent daar niet als subagent. Geef
 dan een losse agent de tekst van het agentbestand mee, of loop de toets zelf langs en zet
