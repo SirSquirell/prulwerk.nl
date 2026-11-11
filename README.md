@@ -16,6 +16,10 @@ GitHub Pages serveert de root van `main`. Een push is genoeg.
 
 ## Een project toevoegen
 
+Eerst langs de portfolio-manager (`.claude/agents/portfolio-manager.md`): die bepaalt of het
+project erop mag en of de links heen en terug kloppen. Het oordeel staat in
+`docs/PORTFOLIO.md`.
+
 Kopieer het `<article class="project">` blok in `index.html`, vervang naam,
 omschrijving, de drie feiten en de twee links. Voor de schermafdruk: maak een
 `.webp` van hoogstens 600px breed, zet hem in de root en verwijs er met een

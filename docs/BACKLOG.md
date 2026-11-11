@@ -282,4 +282,110 @@ de drie nieuwe bestanden.
 
 ---
 
-Eerstvolgende vrije nummer: **PW-09**.
+## PW-09 Vijfde kaart: werk voor een ander
+
+**Status:** eigenaar. De kaart is gebouwd op de branch `claude/charming-edison-qtea2g` en
+door de portfolio-manager geblokkeerd (PW-11, `docs/PORTFOLIO.md`). Hij gaat pas naar
+`main` als de twee "eerst"-voorwaarden daar zijn afgevinkt.
+
+De story zelf, met scope, besluiten en test, staat op die branch en komt mee met de kaart.
+Tot er akkoord is van de eigenaar staat haar naam niet op `main`: de repo is publiek.
+
+---
+
+## PW-10 Portfolio-manager als poortwachter
+
+**Status:** gebouwd
+
+**Waarom.** Tot nu toe besliste de sessie die een kaart bouwde ook zelf of hij erop mocht.
+Bij vier eigen projecten viel dat niet op. Bij de vijfde, werk voor een ander met haar
+handelsnaam erop, is "mag dit" een andere vraag dan "past dit", en die hoort niet bij de
+bouwer te liggen. Daarnaast linkte één van de vier projecten niet terug naar de
+indexpagina, en dat had niemand gezien.
+
+**Scope.** `.claude/agents/portfolio-manager.md`: een read-only agent (Read, Grep, Glob,
+WebFetch) met tien toetspunten, zeven voor de link heen en drie voor de link terug, en drie
+oordelen: TOELATEN, ONDER VOORWAARDEN, BLOKKEREN. `docs/PORTFOLIO.md` als register met een
+rij per project. De regel in CLAUDE.md dat geen kaart of link zonder oordeel naar `main`
+gaat, en een verwijzing in de README.
+
+**Besloten.**
+- De agent schrijft niet. Een beoordelaar die ook kan aanpassen gaat repareren in plaats
+  van oordelen.
+- Het register is een bestand en geen geheugen van de agent: een blokkade moet een
+  volgende sessie overleven.
+- Geen hook of workflow die het afdwingt. De regel staat in CLAUDE.md, net als de rest van
+  de werkwijze hier; een workflow in een repo die er bewust geen heeft is te veel voor
+  vijf kaarten.
+- Werk voor een ander staat zonder naam in het register tot die ander akkoord is, want de
+  repo is publiek.
+
+**Acceptatiecriteria.**
+- Elke kaart in `index.html` heeft een rij in `docs/PORTFOLIO.md`.
+- De agent heeft een expliciete `tools`-lijst zonder Edit, Write of Bash.
+- Een nieuwe kaart zonder rij, of met een open "eerst"-voorwaarde, staat niet op `main`.
+
+**Afhankelijkheden.** De agent bestaat alleen als subagent in een sessie die in deze repo
+start. Vanuit een andere repo: zie CLAUDE.md onder Portfolio-manager.
+
+**Test.** Met de hand: vijf kaarten, vijf rijen. De eerste ronde (PW-11) hield de vijfde
+kaart tegen, ook op punten die de bouwende sessie zelf ok had gevonden.
+
+---
+
+## PW-11 Eerste ronde van de portfolio-manager langs alle kaarten
+
+**Status:** gebouwd
+
+**Waarom.** Even Match, Asteria, Leto en Prijswacht stonden er al voordat de
+portfolio-manager bestond en waren nooit getoetst. De vijfde kaart had alleen een oordeel
+van de sessie die hem bouwde.
+
+**Scope.** De agent over alle vijf, op de repo's van de projecten. De uitkomst staat in
+`docs/PORTFOLIO.md`. In dezelfde ronde: de link terug in Even Match (0.04.3, TK-23 in die
+repo). Prijswacht bleek hem al te hebben; een eerdere telling in deze sessie was fout.
+
+**Uitkomst.** Twee onder voorwaarden (Even Match, Asteria), drie geblokkeerd (Leto,
+Prijswacht, de vijfde kaart). Wat er met de drie kaarten gebeurt die al live staan is
+PW-12.
+
+**Acceptatiecriteria.**
+- In `docs/PORTFOLIO.md` staat bij geen enkele rij meer "nog niet getoetst".
+- Alle vier de eigen projecten linken terug naar `https://prulwerk.nl/`.
+
+**Afhankelijkheden.** PW-10.
+
+**Test.** Het rapport van de agent, met bestand en regel per bevinding; de dragende
+bevindingen zijn daarna met de hand nagelezen in de repo's. Niet gedaan: de live adressen,
+die waren vanuit de cloudsessie niet bereikbaar.
+
+---
+
+## PW-12 Besluiten na de eerste ronde
+
+**Status:** eigenaar
+
+**Waarom.** De portfolio-manager heeft twee kaarten geblokkeerd die al live staan en bij
+een derde gezegd dat de tekst niet klopt. Een kaart van de pagina halen of herschrijven is
+een besluit van Mathijs, niet van een sessie.
+
+**Scope.** Per kaart één besluit:
+- Leto: de kaart aanpassen (nog niet te installeren, demo als hoofdknop, Status-regel) of
+  weghalen.
+- Prijswacht: weghalen tot er een publieke demo is, of de blokkade opheffen met een kaart
+  die alleen noemt wat werkt en Broncode als hoofdknop.
+- Even Match: de tekst rechtzetten (twee tegen twee; de rating filtert niet), en de
+  clublogo's in de schermafdruk aanvaarden of vervangen.
+- Alle vijf: het live adres nalopen in een sessie of browser die erbij kan.
+
+**Acceptatiecriteria.**
+- Bij elke kaart in `docs/PORTFOLIO.md` staat wat Mathijs besloot, met datum.
+- Geen kaart op `main` met een bewering die het project zelf tegenspreekt.
+
+**Afhankelijkheden.** PW-11.
+
+**Test.** `node tools/check.mjs` na elke kaartwijziging, en het register nalezen.
+
+---
+
+Eerstvolgende vrije nummer: **PW-13**.

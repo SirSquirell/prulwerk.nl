@@ -16,6 +16,8 @@ sitemap.xml           één URL; lastmod met de hand bij een inhoudelijke wijzig
 tools/check.mjs       meet overflow, console, externe hosts, fonts en afbeeldingsmaten in headless Chromium
 tools/make-og.mjs     rendert og.png uit de zelfgehoste Archivo
 docs/BACKLOG.md       genummerde stories, PW-01 en verder
+docs/PORTFOLIO.md     register: per project het oordeel van de portfolio-manager en de links heen en terug
+.claude/agents/portfolio-manager.md   de poortwachter zelf, read-only
 favicon.svg           merkteken donker, drie balken
 favicon-light.svg     merkteken licht
 favicon-32.png        vaste 32px, balken op hele pixels zodat de tab scherp blijft
@@ -62,6 +64,20 @@ dus dat is al twee keer de renderbreedte), met `width` en `height` op de echte m
 Niets als data-URI in `index.html`; de kaartbeelden blijven losse bestanden.
 Draai daarna `node tools/check.mjs` (Playwright globaal, zie het kopcommentaar van het script);
 de uitkomst hoort in de story onder Test.
+
+## Portfolio-manager
+
+Geen kaart, en geen nieuwe link van of naar prulwerk.nl, zonder oordeel van de agent
+`portfolio-manager` (`.claude/agents/portfolio-manager.md`, read-only). Hij toetst of een
+project erop mag (werkt voor een vreemde, af genoeg, nuttig, netjes, akkoord bij andermans
+werk, eerlijk), of de link terug klopt, en hij kan blokkeren. Het oordeel staat per project
+in `docs/PORTFOLIO.md`; werk dat bij in dezelfde commit als de kaart. ONDER VOORWAARDEN met
+een open "eerst"-voorwaarde en BLOKKEREN gaan niet naar `main`. Alleen Mathijs heft een
+blokkade op.
+
+Draait de sessie vanuit een andere repo, dan bestaat de agent daar niet als subagent. Geef
+dan een losse agent de tekst van het agentbestand mee, of loop de toets zelf langs en zet
+in het register dat het geen onafhankelijk oordeel is.
 
 ## Domeinbeheer
 
