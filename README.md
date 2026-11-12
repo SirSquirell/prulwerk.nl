@@ -20,9 +20,9 @@ Eerst langs de portfolio-manager (`.claude/agents/portfolio-manager.md`): die be
 project erop mag en of de links heen en terug kloppen. Het oordeel staat in
 `docs/PORTFOLIO.md`.
 
-Kopieer het `<article class="project">` blok in `index.html`, vervang naam,
-omschrijving, de drie feiten en de twee links. Voor de schermafdruk: maak een
-`.webp` van hoogstens 600px breed, zet hem in de root en verwijs er met een
-gewoon `src` naar, met `width` en `height` op de echte maten. Geen data-URI.
-Controleer daarna met `node tools/check.mjs` (overflow, console, externe hosts, fonts en
-afbeeldingsmaten; Playwright globaal, zie het kopcommentaar).
+Kopieer een `<article class="project">` blok in `index.html`, vervang het label, de
+naam, de alinea en de twee links, en pas het nummer en het aantal in de hero aan. Voor
+de schermafdruk: maak een `.webp` van hoogstens 600px breed, zet hem in de root en
+verwijs er met een gewoon `src` naar, met `width` en `height` op de echte maten. Geen
+data-URI. Controleer daarna met `node tools/check.mjs` (overflow, console, externe hosts,
+fonts en afbeeldingsmaten; Playwright globaal, zie het kopcommentaar).

@@ -10,7 +10,7 @@ asteria.webp          schermafdruk voor de Asteria-kaart, 600px breed
 leto.webp             schermafdruk voor de Leto-kaart, 600px breed, demo op gegenereerde data
 prijswacht.webp       schermafdruk voor de Prijswacht-kaart, 600px breed, ontwerp met voorbeeldprijzen
 klantwerk.webp        schermafdruk voor de kaart Klantwerk: schoonmaak, 600px breed, zonder naam, regio en prijzen
-fonts/                Archivo 700 en 900, zelf gehost, latin-subset
+fonts/                Archivo 700 en 900, Instrument Sans (variabel) en JetBrains Mono 400, zelf gehost, latin-subset
 og.png                Open Graph-beeld, 1200x630, gerenderd met tools/make-og.mjs
 robots.txt            alles toegestaan, verwijst naar de sitemap
 sitemap.xml           één URL; lastmod met de hand bij een inhoudelijke wijziging
@@ -40,9 +40,9 @@ Brandingsheet v1, augustus 2026. Donker is de basis.
 | Accent | `#C9F531` | `#A6D400` |
 | Lijn en focus | `#C9F531` | `#718F00` |
 
-De labelkleur is de lichtste tekst die nog als tekst gebruikt wordt (feitlabels op 11,5px,
-de footer op 14px) en moet daarom 4,5:1 halen op elk vlak waar hij op staat, ook op de
-tweede kaartlaag. `#83837E` haalt 5,35 / 5,00 / 4,62 op pagina, kaart en `#191919`;
+De labelkleur is de lichtste tekst die nog als tekst gebruikt wordt (de labels boven de
+projecten op 12px, de footer op 14px) en moet daarom 4,5:1 halen op elk vlak waar hij op
+staat, ook op de tweede kaartlaag. `#83837E` haalt 5,35 / 5,00 / 4,62 op pagina, kaart en `#191919`;
 `#6B6B66` haalt 4,86 / 5,36 / 4,56 op pagina, kaart en `#EDEDE9`. De oorspronkelijke
 `#6B6B67` en `#86867F` uit brandingsheet v1 bleven op 3,1 tot 3,8 steken.
 
@@ -53,15 +53,28 @@ een focusrand 3:1 moet halen op elk licht vlak, en de krapste is de tweede kaart
 achtervoegsel `.nl` in de wordmark mag wel de volle accentkleur zijn, want een logotype
 valt buiten WCAG 1.4.3.
 
-Projecten houden hun eigen accent binnen hun eigen kaart: Even Match cyaan `#00D9F5`,
-Asteria oranje `#F97038`, Leto paars `#B79CFF` (alleen in het merkteken, op zijn eigen
-donkere vlak), Prijswacht blauw `#5B9DFF` (idem). Die staan los van het prulwerk-palet en gaan niet mee in een rebrand van
-de indexpagina.
+Typografie volgens de brandingsheet: Archivo 900 voor koppen en 700 voor knoppen,
+Instrument Sans voor lopende tekst, JetBrains Mono voor de labels boven de projecten.
+Alle drie zelf gehost; de pagina doet geen verzoek naar een andere host.
+
+Een kaart is sinds PW-13 een rij: label, naam, één alinea en twee links, met rechts de
+schermafdruk op een vlak in de tweede kaartlaag. De oude kaart met drie feitregels bestaat
+niet meer; wat een bezoeker moet weten over de status staat in het label of in de alinea.
+
+Projecten houden hun eigen accent binnen hun eigen kaart, op twee plekken: in het
+merkteken en als streep van 4px boven de schermafdruk. Even Match cyaan `#00D9F5`,
+Asteria oranje `#F97038`, Leto paars `#B79CFF`, Prijswacht blauw `#5B9DFF`. Leto en
+Prijswacht hebben geen lichte variant: als tekst komen die kleuren niet voor, en in het
+merkteken staan ze op hun eigen donkere vlak. Een kaart zonder eigen merk krijgt een
+streep in de labelkleur. De accenten staan los van het prulwerk-palet en gaan niet mee
+in een rebrand van de indexpagina.
 
 Een project toevoegen: kopieer een `<article class="project">` blok in `index.html` en
-vervang naam, omschrijving, de drie feiten en de twee links. De schermafdruk is een los
-`.webp`-bestand in de root, hoogstens 600px breed (de kaart wordt nooit breder dan 300px,
-dus dat is al twee keer de renderbreedte), met `width` en `height` op de echte maten.
+vervang het label (nummer, soort, één statuswoord), de naam, de alinea en de twee links.
+Pas het aantal in de hero aan. De streep krijgt zijn kleur via een klasse `p-<naam>` die
+`--stripe` zet. De schermafdruk is een los `.webp`-bestand in de root, hoogstens 600px
+breed (hij wordt nooit breder getoond dan 380px), met `width` en `height` op de echte
+maten.
 Niets als data-URI in `index.html`; de kaartbeelden blijven losse bestanden.
 Draai daarna `node tools/check.mjs` (Playwright globaal, zie het kopcommentaar van het script);
 de uitkomst hoort in de story onder Test.

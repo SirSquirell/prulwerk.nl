@@ -30,8 +30,10 @@
   } catch (e) {}
 </script>
 <style>
-/* Archivo, zelf gehost: alleen de twee gewichten die de pagina gebruikt, latin-subset.
-   Dezelfde statische instances als asteria.prulwerk.nl. Geen verzoek naar Google. */
+/* Lettertypes, zelf gehost, latin-subset. Geen verzoek naar Google.
+   Archivo: koppen en knoppen, de twee gewichten die de pagina gebruikt, dezelfde
+   statische instances als asteria.prulwerk.nl. Instrument Sans: lopende tekst, één
+   variabel bestand. JetBrains Mono: de labels boven de projecten. */
 @font-face{
   font-family:"Archivo"; font-style:normal; font-weight:700; font-display:swap;
   src:url("fonts/archivo-700.woff2") format("woff2");
@@ -39,6 +41,14 @@
 @font-face{
   font-family:"Archivo"; font-style:normal; font-weight:900; font-display:swap;
   src:url("fonts/archivo-900.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Instrument Sans"; font-style:normal; font-weight:400 700; font-display:swap;
+  src:url("fonts/instrument-sans.woff2") format("woff2");
+}
+@font-face{
+  font-family:"JetBrains Mono"; font-style:normal; font-weight:400; font-display:swap;
+  src:url("fonts/jetbrains-mono-400.woff2") format("woff2");
 }
 /* Palet. Elke waarde staat hier precies één keer; hieronder wordt hij alleen
    toegewezen. Zo kan een modus niet stilletjes uit de pas gaan lopen. */
@@ -49,44 +59,52 @@
   --d-shadow:0 24px 60px rgb(0 0 0 / .45);
   --d-asteria-star:#F97038; --d-evenmatch-accent:#00D9F5;
 
-  --l-bg:#F4F4F1; --l-surface:#FFFFFF; --l-surface-2:#EDEDE9; --l-line:#E3E3DD;
+  --l-bg:#F4F4F1; --l-surface-2:#EDEDE9; --l-line:#E3E3DD;
   --l-text:#12120F; --l-text-2:#5A5A55; --l-text-3:#6B6B66;
   --l-accent:#A6D400; --l-accent-line:#718F00;
   --l-shadow:0 20px 50px rgb(18 18 15 / .10);
   --l-asteria-star:#D9531E; --l-evenmatch-accent:currentColor;
+  --l-mark-card:#EFEFEF;
+
+  /* Gelden in beide modi: de middelste balk van het merkteken en de twee
+     projectaccenten die geen lichte variant hebben. */
+  --mark-mid:#868686; --leto-accent:#B79CFF; --prijswacht-accent:#5B9DFF;
 
   /* Donker is de basis. */
-  --bg:var(--d-bg); --surface:var(--d-surface); --surface-2:var(--d-surface-2);
+  --bg:var(--d-bg); --surface-2:var(--d-surface-2);
   --line:var(--d-line); --text:var(--d-text); --text-2:var(--d-text-2);
   --text-3:var(--d-text-3); --accent:var(--d-accent);
   --accent-line:var(--d-accent-line); --shadow:var(--d-shadow);
   --asteria-star:var(--d-asteria-star); --evenmatch-accent:var(--d-evenmatch-accent);
+  --mark-card:var(--d-surface);
 
   color-scheme:dark;
   --on-accent:#12120F;
-  --r-card:18px;
   --display:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 /* Systeemvoorkeur, behalve als de bezoeker expliciet donker heeft gekozen. */
 @media (prefers-color-scheme: light){
   :root:not([data-theme="dark"]){
     color-scheme:light;
-    --bg:var(--l-bg); --surface:var(--l-surface); --surface-2:var(--l-surface-2);
+    --bg:var(--l-bg); --surface-2:var(--l-surface-2);
     --line:var(--l-line); --text:var(--l-text); --text-2:var(--l-text-2);
     --text-3:var(--l-text-3); --accent:var(--l-accent);
     --accent-line:var(--l-accent-line); --shadow:var(--l-shadow);
     --asteria-star:var(--l-asteria-star); --evenmatch-accent:var(--l-evenmatch-accent);
+    --mark-card:var(--l-mark-card);
   }
 }
 /* Expliciete keuze wint, ook tegen een donkere systeemvoorkeur in. */
 :root[data-theme="light"]{
   color-scheme:light;
-  --bg:var(--l-bg); --surface:var(--l-surface); --surface-2:var(--l-surface-2);
+  --bg:var(--l-bg); --surface-2:var(--l-surface-2);
   --line:var(--l-line); --text:var(--l-text); --text-2:var(--l-text-2);
   --text-3:var(--l-text-3); --accent:var(--l-accent);
   --accent-line:var(--l-accent-line); --shadow:var(--l-shadow);
   --asteria-star:var(--l-asteria-star); --evenmatch-accent:var(--l-evenmatch-accent);
+  --mark-card:var(--l-mark-card);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -97,127 +115,126 @@ body{
 }
 a{color:inherit}
 img{max-width:100%; display:block}
-.wrap{width:100%; max-width:1080px; margin:0 auto; padding:0 24px}
+.wrap{width:100%; max-width:1120px; margin:0 auto; padding:0 24px}
+
+/* Tekstlink: de navigatie boven en onder, en de tweede link van een project. */
+.tl{
+  font:inherit; background:none; border:0; padding:0; cursor:pointer;
+  display:inline-flex; align-items:center; min-height:44px;
+  color:var(--text-2); text-decoration:none; white-space:nowrap;
+  transition:color .25s cubic-bezier(.16,1,.3,1), opacity .12s ease-out;
+}
+.tl:hover{color:var(--text)}
+.tl:focus-visible{outline:2px solid var(--accent-line); outline-offset:3px; border-radius:6px}
 
 /* header */
-.top{display:flex; align-items:center; justify-content:space-between; gap:16px; height:72px}
-.mark{font-family:var(--display); font-weight:900; font-size:19px; letter-spacing:-.02em; text-decoration:none}
+.top{display:flex; align-items:center; justify-content:space-between; gap:16px; height:76px}
+.mark{
+  font-family:var(--display); font-weight:900; font-size:20px; letter-spacing:-.02em; text-decoration:none;
+  display:inline-flex; align-items:center; min-height:44px;
+}
 /* Wordmark: het achtervoegsel is lime. Een logotype valt buiten de contrasteis van
    WCAG 1.4.3, dus in licht mag hier de accentkleur staan en niet de lijnvariant. */
-.mark span{color:var(--accent); font-weight:900}
-.top .ghostlink{
-  font:inherit; background:none; cursor:pointer;
-  font-size:14px; color:var(--text-2); text-decoration:none;
-  padding:8px 14px; border:1px solid var(--line); border-radius:999px;
-  transition:color .25s cubic-bezier(.16,1,.3,1), border-color .25s cubic-bezier(.16,1,.3,1),
-    transform .15s cubic-bezier(.16,1,.3,1), opacity .12s ease-out;
-  white-space:nowrap;
-}
-.top .ghostlink:hover{color:var(--text); border-color:var(--text-3)}
-.top .ghostlink:active{transform:scale(.97)}
+.mark span{color:var(--accent)}
 .mark:focus-visible{outline:2px solid var(--accent-line); outline-offset:4px; border-radius:6px}
-.top .ghostlink:focus-visible{outline:2px solid var(--accent-line); outline-offset:3px}
+.nav{display:flex; align-items:center; gap:24px; font-size:14px}
 
 /* hero */
-.hero{padding:76px 0 64px}
+.hero{padding-block:96px 104px}
+/* De kop groeit met 9,4vw tot 128px. Onder de 550px zou hij op 52px blijven staan en
+   past "Kleine dingen" niet meer op één regel; daar krimpt hij mee met de breedte. */
 .hero h1{
-  font-family:var(--display); font-weight:900; font-size:clamp(38px,6.4vw,64px);
-  line-height:1.04; letter-spacing:-.035em; margin:0; max-width:9.4em;
+  font-family:var(--display); font-weight:900;
+  font-size:clamp(36px, min(11.5vw, max(52px, 9.4vw)), 128px);
+  line-height:.92; letter-spacing:-.04em; margin:0;
 }
-.hero h1 em{font-style:normal; position:relative; white-space:nowrap}
-.hero h1 em::after{
-  content:""; position:absolute; left:0; right:0; bottom:.06em; height:.13em;
-  background:var(--accent-line); border-radius:2px; opacity:.9;
-}
-.hero p{color:var(--text-2); font-size:17px; margin:22px 0 0; max-width:46ch}
+.hero h1 em{font-style:normal; box-shadow:inset 0 -.13em 0 var(--accent-line)}
+.hero p{color:var(--text-2); font-size:19px; margin:36px 0 0}
 
-/* project */
+/* project: een rij, tekst links en schermafdruk rechts, gescheiden door een lijn */
 .project{
-  display:grid; grid-template-columns:minmax(0,300px) minmax(0,1fr);
-  gap:clamp(28px,5vw,64px); align-items:center;
-  padding:36px; border:1px solid var(--line); border-radius:var(--r-card);
-  background:linear-gradient(180deg,var(--surface),var(--surface-2));
-  box-shadow:var(--shadow);
+  --stripe:var(--text-3);
+  display:flex; flex-wrap:wrap; align-items:center; gap:48px;
+  padding:56px 0; border-top:1px solid var(--line);
 }
-.shot{
-  display:block; border-radius:14px; overflow:hidden; border:1px solid var(--line);
-  background:#050505; max-height:420px; position:relative;
+.project:last-child{border-bottom:1px solid var(--line)}
+.project .body{flex:1 1 380px; min-width:0}
+.eyebrow{
+  margin:0 0 20px; font-family:var(--mono); font-size:12px; line-height:1.5;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--text-3);
 }
-.shot img{width:100%; height:auto; object-fit:cover; object-position:top}
-.shot:focus-visible{outline:2px solid var(--accent-line); outline-offset:3px}
 .project h2{
-  font-family:var(--display); font-weight:900; font-size:clamp(28px,3.6vw,38px);
-  letter-spacing:-.03em; line-height:1.05; margin:0;
+  font-family:var(--display); font-weight:900; font-size:clamp(36px,4.6vw,56px);
+  letter-spacing:-.035em; line-height:1; margin:0;
 }
-.project h2.lockup a{display:flex; align-items:center; line-height:1;
-  text-decoration:none; color:inherit; width:fit-content}
-.project h2.lockup svg{width:auto; flex:none}
-.project h2.lockup a:focus-visible{outline:2px solid var(--accent-line); outline-offset:6px; border-radius:4px}
-/* Asteria: verhoudingen uit asteria-logo-dark.svg, gedeeld door font-size 30. */
-.project h2.asteria{font-family:var(--body); font-weight:500; letter-spacing:.0867em}
-.project h2.asteria a{gap:.467em}
-.project h2.asteria svg{height:1.333em}
-/* Even Match: verhoudingen uit Teamkiezeer v3, gedeeld door font-size 21. */
-.project h2.evenmatch{letter-spacing:-.035em; font-stretch:112%}
-.project h2.evenmatch a{gap:.476em}
-.project h2.evenmatch svg{height:1.429em}
-.project h2.evenmatch em{font-style:normal; color:var(--evenmatch-accent)}
-/* Leto: merkteken uit leto.prulwerk.nl/favicon.svg, naam in de displayletter van de pagina.
-   Het paars zit alleen in het icoon, op zijn eigen donkere vlak, dus geen lichte variant. */
-.project h2.leto a{gap:.4em}
-.project h2.leto svg{height:1.15em}
-/* Prijswacht: merkteken uit prijs.prulwerk.nl/favicon.svg. Het blauw zit alleen in het
-   icoon, op zijn eigen donkere vlak, dus geen lichte variant. */
-.project h2.prijswacht a{gap:.4em}
-.project h2.prijswacht svg{height:1.15em}
-.project .lead{color:var(--text-2); margin:16px 0 0; max-width:52ch}
-.project + .project{margin-top:clamp(20px,3vw,28px)}
-@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion: no-preference){
-  .project{transition:transform .2s cubic-bezier(.16,1,.3,1), border-color .2s cubic-bezier(.16,1,.3,1)}
-  .shot img{transition:transform .3s cubic-bezier(.16,1,.3,1)}
-  .project:hover{transform:translateY(-2px); border-color:var(--text-3)}
-  .project:hover .shot img{transform:scale(1.015)}
-  .project:active{transform:translateY(0)}
-}
-@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion: reduce){
-  .project:hover{border-color:var(--text-3)}
-}
-.facts{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:10px}
-.facts li{display:grid; grid-template-columns:104px 1fr; gap:14px; align-items:baseline; font-size:14.5px}
-.facts b{font-family:var(--display); font-weight:700; font-size:11.5px; letter-spacing:.09em;
-  text-transform:uppercase; color:var(--text-3)}
-.facts span{color:var(--text-2)}
-.actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
+.project h2 a{display:inline-flex; align-items:center; gap:.286em; text-decoration:none; color:inherit}
+.project h2 svg{height:.857em; width:auto; flex:none}
+.project h2 a:focus-visible{outline:2px solid var(--accent-line); outline-offset:6px; border-radius:4px}
+/* Leto en Prijswacht: het merkteken uit hun favicon, op zijn eigen donkere vlak. Dat
+   vlak heeft de kleur van de pagina, dus een rand in de lijnkleur houdt het zichtbaar.
+   Asteria: gewicht en spatiëring uit asteria-logo-dark.svg. */
+.p-asteria h2{font-family:var(--body); font-weight:500; font-size:clamp(32px,4vw,48px); letter-spacing:.0867em}
+.p-asteria h2 a{gap:.375em}
+.p-asteria h2 svg{height:1.0625em}
+.p-evenmatch h2 em{font-style:normal; color:var(--evenmatch-accent)}
+.lead{color:var(--text-2); font-size:19px; line-height:1.5; margin:20px 0 0; max-width:34ch}
+.actions{display:flex; flex-wrap:wrap; align-items:center; gap:24px; margin-top:32px}
+.actions .tl{font-size:15px}
 .btn{
   font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:-.01em;
   text-decoration:none; padding:13px 24px; border-radius:999px; white-space:nowrap;
-  border:1px solid transparent;
-  transition:transform .2s cubic-bezier(.16,1,.3,1), background-color .25s, border-color .25s, color .25s;
+  background:var(--accent); color:var(--on-accent);
+  transition:transform .2s cubic-bezier(.16,1,.3,1), background-color .25s;
 }
-.btn-primary{background:var(--accent); color:var(--on-accent)}
-.btn-primary:hover{transform:translateY(-2px)}
-.btn-primary:active{transform:translateY(0) scale(.985)}
-.btn-ghost{border-color:var(--line); color:var(--text)}
-.btn-ghost:hover{border-color:var(--text-3); transform:translateY(-2px)}
-.btn-ghost:active{transform:translateY(0) scale(.985)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.985)}
 .btn:focus-visible{outline:2px solid var(--accent-line); outline-offset:3px}
 
+/* Schermafdruk: staat op een vlak in de tweede kaartlaag en loopt er onderaan uit.
+   De streep bovenaan is het accent van het project zelf; een project zonder eigen
+   merk krijgt de labelkleur. Het vlak heeft een verhouding en geen vaste hoogte:
+   smaller wordt ook lager, zodat de afbeelding er op elke breedte onderuit loopt. */
+.shot{
+  flex:1 1 380px; min-width:0; display:flex; justify-content:center;
+  aspect-ratio:512 / 380; max-height:380px; overflow:hidden; border-radius:18px;
+  background:var(--surface-2); border-top:4px solid var(--stripe);
+  padding:44px 40px 0;
+}
+.shot img{
+  width:100%; max-width:340px; height:auto; align-self:flex-start;
+  border-radius:12px 12px 0 0; box-shadow:var(--shadow);
+}
+.shot:focus-visible{outline:2px solid var(--accent-line); outline-offset:3px}
+/* De schermafdruk van Even Match is bijna vierkant; op 340px vult hij het vlak niet. */
+.p-evenmatch .shot img{max-width:380px}
+.p-evenmatch{--stripe:var(--d-evenmatch-accent)}
+.p-asteria{--stripe:var(--asteria-star)}
+.p-leto{--stripe:var(--leto-accent)}
+.p-prijswacht{--stripe:var(--prijswacht-accent)}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion: no-preference){
+  .shot img{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  .project:hover .shot img{transform:translateY(-6px)}
+}
+
 /* footer */
-footer{margin-top:80px; border-top:1px solid var(--line); padding:26px 0 56px}
-footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
-  font-size:14px; color:var(--text-3)}
-footer a{color:var(--text-2); text-decoration:none}
-footer a:hover{color:var(--text)}
-footer a:focus-visible{outline:2px solid var(--accent-line); outline-offset:3px; border-radius:3px}
+footer{padding-block:96px 48px}
+footer .wrap{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px 32px}
+.sig{display:flex; align-items:center; gap:16px}
+.sig svg{width:44px; height:44px; flex:none}
+.sig p{margin:0}
+.sig .name{font-family:var(--display); font-weight:900; font-size:18px; letter-spacing:-.02em; line-height:1.2}
+.sig .name span{color:var(--accent)}
+.sig .by{margin-top:2px; font-size:14px; color:var(--text-3)}
+footer .nav{gap:28px}
 
 /* motion */
 html.theme-anim body, html.theme-anim .project, html.theme-anim .shot,
-html.theme-anim .btn, html.theme-anim .top .ghostlink{
+html.theme-anim .btn, html.theme-anim .tl{
   transition:background-color .22s ease, color .22s ease, border-color .22s ease;
 }
 @media (prefers-reduced-motion: reduce){
   html.theme-anim body, html.theme-anim .project, html.theme-anim .shot,
-  html.theme-anim .btn, html.theme-anim .top .ghostlink{transition:none}
+  html.theme-anim .btn, html.theme-anim .tl{transition:none}
 }
 @media (prefers-reduced-motion: no-preference){
   .rise{opacity:0; transform:translateY(18px); animation:rise .75s cubic-bezier(.16,1,.3,1) forwards}
@@ -226,11 +243,17 @@ html.theme-anim .btn, html.theme-anim .top .ghostlink{
 }
 
 @media (max-width:820px){
-  .project{grid-template-columns:1fr; padding:24px; gap:28px}
-  .shot{max-width:280px; margin:0 auto; max-height:340px}
-  .hero{padding:52px 0 44px}
-  .wrap{padding:0 20px}
-  .facts li{grid-template-columns:96px 1fr}
+  .hero{padding-block:56px 64px}
+  .hero p{margin-top:28px}
+  .project{gap:32px; padding:44px 0}
+  footer{padding-block:64px 40px}
+}
+@media (max-width:480px){
+  .wrap{padding-inline:20px}
+  .project h2{font-size:32px}
+  .p-asteria h2{font-size:28px}
+  .lead{font-size:18px}
+  .shot{padding:32px 24px 0}
 }
 </style>
 </head>
@@ -238,27 +261,24 @@ html.theme-anim .btn, html.theme-anim .top .ghostlink{
 
 <header class="wrap top rise d1">
   <a class="mark" href="/">prulwerk<span>.nl</span></a>
-  <span style="display:flex; align-items:center; gap:10px">
-    <button class="ghostlink" id="theme" type="button">Licht</button>
-    <a class="ghostlink" href="https://github.com/SirSquirell" rel="me noopener">GitHub</a>
-  </span>
+  <nav class="nav" aria-label="Hoofdmenu">
+    <a class="tl" href="https://github.com/SirSquirell" rel="me noopener">GitHub</a>
+    <button class="tl" type="button" data-theme-toggle="kort">Licht</button>
+  </nav>
 </header>
 
 <main>
   <section class="wrap hero rise d2">
-    <h1>Kleine dingen die <em>af</em> zijn.</h1>
-    <p>Eigen bouwsels van Mathijs. Wat bruikbaar genoeg is om te delen krijgt hier een plek, de rest blijft gewoon op GitHub staan.</p>
+    <h1>Kleine dingen<br>die <em>af</em> zijn.</h1>
+    <!-- Het aantal is het aantal projecten hieronder. Komt er een bij, pas dit en de nummering aan. -->
+    <p>Vijf stuks. De rest staat op GitHub.</p>
   </section>
 
-  <section class="wrap rise d3">
-    <article class="project">
-      <a class="shot" href="https://evenmatch.prulwerk.nl" tabindex="-1">
-        <img src="evenmatch.webp"
-             width="460" height="424" fetchpriority="high" decoding="async"
-             alt="Even Match na een loting: FC Utrecht tegen AZ met hun clublogo's, beide 3,5 sterren, ratings 71 en 73, en de eerlijkheidsas met het oordeel net aan bij een verschil van 2.">
-      </a>
-      <div>
-        <h2 class="lockup evenmatch"><a href="https://evenmatch.prulwerk.nl">
+  <section class="wrap rise d3" aria-label="Projecten">
+    <article class="project p-evenmatch">
+      <div class="body">
+        <p class="eyebrow">01 — webapp · werkt offline</p>
+        <h2><a href="https://evenmatch.prulwerk.nl">
           <svg viewBox="0 0 30 30" aria-hidden="true" focusable="false">
             <rect x=".5" y=".5" width="29" height="29" rx="8.5" fill="#1B1F26" stroke="#2A3038"/>
             <rect x="8.5" y="7.5" width="4" height="15" rx="2" fill="#FFFFFF"/>
@@ -266,26 +286,22 @@ html.theme-anim .btn, html.theme-anim .top .ghostlink{
           </svg>
           <span>EVEN<em>MATCH</em></span>
         </a></h2>
-        <p class="lead">Teamkiezer voor EA FC Kick-Off, twee tegen twee. Eén knop, en je krijgt twee teams met dezelfde sterren. De app zegt erbij hoe ver de squad-ratings uit elkaar liggen: gelijkwaardig, net aan of scheef.</p>
-        <ul class="facts">
-          <li><b>Pool</b><span>clubs en landenteams uit alle competities</span></li>
-          <li><b>Data</b><span>ratings uit EA FC, automatisch bijgehouden</span></li>
-          <li><b>Offline</b><span>werkt door zonder verbinding</span></li>
-        </ul>
+        <p class="lead">Teamkiezer voor EA FC Kick-Off, twee tegen twee. Eén knop, twee teams met dezelfde sterren, en de app zegt erbij hoe ver de squad-ratings uit elkaar liggen.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="https://evenmatch.prulwerk.nl">Open de app</a>
-          <a class="btn btn-ghost" href="https://github.com/SirSquirell/Teamkiezeer" rel="noopener">Broncode</a>
+          <a class="btn" href="https://evenmatch.prulwerk.nl">Open de app</a>
+          <a class="tl" href="https://github.com/SirSquirell/Teamkiezeer" rel="noopener">Broncode</a>
         </div>
       </div>
-    </article>
-    <article class="project">
-      <a class="shot" href="https://asteria.prulwerk.nl" tabindex="-1">
-        <img src="asteria.webp"
-             width="600" height="695" loading="lazy"
-             alt="Asteria: de totale waarde van de rekening als groot bedrag, met ingelegd geld, resultaat en de dagkoers ernaast, en daaronder het waardeverloop over vijf jaar als grafiek.">
+      <a class="shot" href="https://evenmatch.prulwerk.nl" tabindex="-1">
+        <img src="evenmatch.webp"
+             width="460" height="424" fetchpriority="high" decoding="async"
+             alt="Even Match na een loting: FC Utrecht tegen AZ met hun clublogo's, beide 3,5 sterren, ratings 71 en 73, en de eerlijkheidsas met het oordeel net aan bij een verschil van 2.">
       </a>
-      <div>
-        <h2 class="lockup asteria"><a href="https://asteria.prulwerk.nl">
+    </article>
+    <article class="project p-asteria">
+      <div class="body">
+        <p class="eyebrow">02 — chrome-extensie · DEGIRO</p>
+        <h2><a href="https://asteria.prulwerk.nl">
           <svg viewBox="2 2 44 40" aria-hidden="true" focusable="false">
             <path d="M5 37 L15 27 L24 31 L33 19" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="5" cy="37" r="2.8" fill="currentColor"/>
@@ -295,86 +311,74 @@ html.theme-anim .btn, html.theme-anim .top .ghostlink{
           </svg>
           ASTERIA
         </a></h2>
-        <p class="lead">Chrome-extensie die laat zien wat je DEGIRO-rekening elke dag waard was sinds je hem opende. Die grafiek geeft DEGIRO zelf niet. Alles blijft in je eigen browser, er is geen server en geen account.</p>
-        <ul class="facts">
-          <li><b>Historie</b><span>dagelijkse waarde, teruggerekend uit je eigen transacties</span></li>
-          <li><b>Privacy</b><span>alles lokaal, geen server, bedragen met &eacute;&eacute;n klik uit</span></li>
-          <li><b>Data</b><span>controleert zichzelf tegen het totaal van DEGIRO</span></li>
-        </ul>
+        <p class="lead">Wat je DEGIRO-rekening elke dag waard was, sinds je hem opende. Die grafiek geeft DEGIRO zelf niet. Alles blijft in je eigen browser, zonder server of account.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="https://asteria.prulwerk.nl">Bekijk Asteria</a>
-          <a class="btn btn-ghost" href="https://github.com/SirSquirell/Claudiclaude" rel="noopener">Broncode</a>
+          <a class="btn" href="https://asteria.prulwerk.nl">Bekijk Asteria</a>
+          <a class="tl" href="https://github.com/SirSquirell/Claudiclaude" rel="noopener">Broncode</a>
         </div>
       </div>
-    </article>
-    <article class="project">
-      <a class="shot" href="https://leto.prulwerk.nl" tabindex="-1">
-        <img src="leto.webp"
-             width="600" height="805" loading="lazy"
-             alt="Leto op demogegevens: de samenstelling over de hele historie, grootste positie 9,8%, zeven open posities, en daaronder het gestapelde waardeverloop per instrument met cash bovenop.">
+      <a class="shot" href="https://asteria.prulwerk.nl" tabindex="-1">
+        <img src="asteria.webp"
+             width="600" height="695" loading="lazy"
+             alt="Asteria: de totale waarde van de rekening als groot bedrag, met ingelegd geld, resultaat en de dagkoers ernaast, en daaronder het waardeverloop over vijf jaar als grafiek.">
       </a>
-      <div>
-        <h2 class="lockup leto"><a href="https://leto.prulwerk.nl">
+    </article>
+    <article class="project p-leto">
+      <div class="body">
+        <p class="eyebrow">03 — chrome-extensie · nog niet te installeren</p>
+        <h2><a href="https://leto.prulwerk.nl">
           <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
-            <rect width="512" height="512" rx="96" fill="#050505"/>
+            <rect x="6" y="6" width="500" height="500" rx="90" fill="#050505" stroke="var(--d-line)" stroke-width="12"/>
             <path d="M368 320 A124 124 0 1 1 256 144" fill="none" stroke="#F2F2F0" stroke-width="50" stroke-linecap="round"/>
             <path d="M256 144 A124 124 0 0 1 368 320" fill="none" stroke="#B79CFF" stroke-width="50" stroke-linecap="round"/>
           </svg>
           Leto
         </a></h2>
-        <p class="lead">Chrome-extensie die laat zien wat je Trading 212-rekening elke dag waard was, hoeveel daarvan inleg is en hoe de weging van elke positie verschoof. Zusje van Asteria: alles blijft in je eigen browser, met een sleutel die alleen mag lezen.</p>
-        <ul class="facts">
-          <li><b>Bron</b><span>de offici&euml;le API van Trading 212, met je eigen leessleutel</span></li>
-          <li><b>Historie</b><span>dagelijkse waarde, inleg en samenstelling, teruggerekend uit je transacties</span></li>
-          <li><b>Status</b><span>af, maar nog niet te installeren: of delen mag onder de API-voorwaarden van Trading 212 is nog een open vraag</span></li>
-        </ul>
+        <p class="lead">Zusje van Asteria, voor Trading 212. Dagwaarde, inleg en weging per positie, met een sleutel die alleen mag lezen. Af, maar of delen mag onder de API-voorwaarden is nog een open vraag.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="https://leto.prulwerk.nl/demo/">Probeer de demo</a>
-          <a class="btn btn-ghost" href="https://leto.prulwerk.nl">Bekijk Leto</a>
+          <a class="btn" href="https://leto.prulwerk.nl/demo/">Probeer de demo</a>
+          <a class="tl" href="https://leto.prulwerk.nl">Bekijk Leto</a>
         </div>
       </div>
-    </article>
-    <article class="project">
-      <a class="shot" href="https://prijs.prulwerk.nl" tabindex="-1">
-        <img src="prijswacht.webp"
-             width="600" height="800" loading="lazy"
-             alt="Ontwerp van prijswacht met voorbeeldprijzen: de lijst met een aftelling naar Black Friday, en per product de laagste prijs nu, bij welke winkel, en hoeveel hij deze week zakte.">
+      <a class="shot" href="https://leto.prulwerk.nl" tabindex="-1">
+        <img src="leto.webp"
+             width="600" height="805" loading="lazy"
+             alt="Leto op demogegevens: de samenstelling over de hele historie, grootste positie 9,8%, zeven open posities, en daaronder het gestapelde waardeverloop per instrument met cash bovenop.">
       </a>
-      <div>
-        <h2 class="lockup prijswacht"><a href="https://prijs.prulwerk.nl">
+    </article>
+    <article class="project p-prijswacht">
+      <div class="body">
+        <p class="eyebrow">04 — webapp · op uitnodiging</p>
+        <h2><a href="https://prijs.prulwerk.nl">
           <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
-            <rect width="512" height="512" rx="96" fill="#050505"/>
+            <rect x="6" y="6" width="500" height="500" rx="90" fill="#050505" stroke="var(--d-line)" stroke-width="12"/>
             <polyline points="112,160 208,232 272,200" fill="none" stroke="#F2F2F0" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
             <polyline points="272,200 400,352" fill="none" stroke="#5B9DFF" stroke-width="44" stroke-linecap="round"/>
           </svg>
           Prijswacht
         </a></h2>
-        <p class="lead">Priv&eacute; prijstracker. Je plakt een link naar een product, prijswacht volgt de prijs bij Nederlandse winkels en laat per dag zien wat hij deed. Meldingen bij een prijsdaling en het oordeel of een Black Friday-korting echt is komen nog.</p>
-        <ul class="facts">
-          <li><b>Status</b><span>verzamelt prijzen sinds 9 oktober; op uitnodiging, zonder account zie je alleen het inlogscherm</span></li>
-          <li><b>Winkels</b><span>Coolblue, Amazon.nl en andere Nederlandse winkels, gematcht op EAN; bol blokkeert nog</span></li>
-          <li><b>Komt nog</b><span>meldingen en doelprijs, daarna het oordeel echte deal, nep-korting of meh</span></li>
-        </ul>
+        <p class="lead">Privé prijstracker. Je plakt een link, prijswacht volgt de prijs bij Nederlandse winkels en laat per dag zien wat hij deed. Zonder account zie je alleen het inlogscherm. Meldingen en het oordeel over Black Friday-kortingen komen nog.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="https://github.com/SirSquirell/prijs.prulwerk.nl" rel="noopener">Broncode</a>
-          <a class="btn btn-ghost" href="https://prijs.prulwerk.nl">Bekijk Prijswacht</a>
+          <a class="btn" href="https://github.com/SirSquirell/prijs.prulwerk.nl" rel="noopener">Broncode</a>
+          <a class="tl" href="https://prijs.prulwerk.nl">Bekijk Prijswacht</a>
         </div>
       </div>
+      <a class="shot" href="https://prijs.prulwerk.nl" tabindex="-1">
+        <img src="prijswacht.webp"
+             width="600" height="800" loading="lazy"
+             alt="Ontwerp van prijswacht met voorbeeldprijzen: de lijst met een aftelling naar Black Friday, en per product de laagste prijs nu, bij welke winkel, en hoeveel hij deze week zakte.">
+      </a>
     </article>
     <article class="project">
+      <div class="body">
+        <p class="eyebrow">05 — website en portaal · nog niet live</p>
+        <h2>Klantwerk: schoonmaak</h2>
+        <p class="lead">Website, klantportaal en beheer voor een schoonmaakbedrijf van één persoon. Klanten boeken zelf en zien hun facturen, de eigenaar regelt diensten, prijzen en agenda vanaf de telefoon. Gebouwd voor een klant, daarom zonder naam en zonder link.</p>
+      </div>
       <div class="shot">
         <img src="klantwerk.webp"
              width="600" height="840" loading="lazy"
              alt="De homepage van de site op een telefoon, zonder de naam van het bedrijf: een grote kop, een korte belofte, en een blok waarmee je een boeking begint met je postcode.">
-      </div>
-      <div>
-        <h2>Klantwerk: schoonmaak</h2>
-        <p class="lead">Website, klantportaal en beheer voor een schoonmaakbedrijf van &eacute;&eacute;n persoon. Klanten boeken zelf, verzetten of annuleren hun afspraak en zien hun facturen. De eigenaar regelt diensten, prijzen en agenda zelf, vanaf de telefoon.</p>
-        <ul class="facts">
-          <li><b>Boeken</b><span>eigen agenda, van postcode tot bevestiging, zonder dubbele afspraken</span></li>
-          <li><b>Talen</b><span>drie talen, voor site, portaal, mail en beheer</span></li>
-          <li><b>Status</b><span>gebouwd voor een klant en nog niet live; daarom zonder naam en zonder link</span></li>
-        </ul>
       </div>
     </article>
   </section>
@@ -382,14 +386,29 @@ html.theme-anim .btn, html.theme-anim .top .ghostlink{
 
 <footer>
   <div class="wrap">
-    <span>prulwerk.nl</span>
-    <span>Meer werk op <a href="https://github.com/SirSquirell" rel="me noopener">github.com/SirSquirell</a></span>
+    <div class="sig">
+      <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+        <rect width="512" height="512" rx="96" fill="var(--mark-card)"/>
+        <rect x="112" y="144" width="288" height="56" rx="28" fill="var(--text)"/>
+        <rect x="112" y="240" width="208" height="56" rx="28" fill="var(--mark-mid)"/>
+        <rect x="112" y="336" width="128" height="56" rx="28" fill="var(--accent)"/>
+      </svg>
+      <div>
+        <p class="name">prulwerk<span>.nl</span></p>
+        <p class="by">Gemaakt door Mathijs</p>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Footer">
+      <a class="tl" href="https://github.com/SirSquirell" rel="me noopener">GitHub</a>
+      <button class="tl" type="button" data-theme-toggle="lang">Lichte modus</button>
+    </nav>
   </div>
 </footer>
 
 <script>
   (function () {
-    var root = document.documentElement, btn = document.getElementById("theme");
+    var root = document.documentElement;
+    var btns = [].slice.call(document.querySelectorAll("[data-theme-toggle]"));
     var sysLight = matchMedia("(prefers-color-scheme: light)");
     var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
     function isLight() {
@@ -398,22 +417,33 @@ html.theme-anim .btn, html.theme-anim .top .ghostlink{
     }
     function applyLabel() {
       var light = isLight();
-      // De knop noemt waar je naartoe gaat, niet waar je bent.
-      btn.textContent = light ? "Donker" : "Licht";
-      btn.setAttribute("aria-label", light ? "Donkere modus aanzetten" : "Lichte modus aanzetten");
+      btns.forEach(function (btn) {
+        // De knop noemt waar je naartoe gaat, niet waar je bent.
+        if (btn.dataset.themeToggle === "lang") {
+          btn.textContent = light ? "Donkere modus" : "Lichte modus";
+        } else {
+          btn.textContent = light ? "Donker" : "Licht";
+          btn.setAttribute("aria-label", light ? "Donkere modus aanzetten" : "Lichte modus aanzetten");
+        }
+      });
     }
     // Bij een klik wisselt de tekst van lengte; een korte crossfade voorkomt dat
     // de knop zichtbaar hapt van breedte. Bij de eerste render niet animeren.
     function label(animate) {
       if (!animate || reduceMotion.matches) { applyLabel(); return; }
-      btn.style.opacity = "0";
-      setTimeout(function () { applyLabel(); btn.style.opacity = ""; }, 110);
+      btns.forEach(function (btn) { btn.style.opacity = "0"; });
+      setTimeout(function () {
+        applyLabel();
+        btns.forEach(function (btn) { btn.style.opacity = ""; });
+      }, 110);
     }
-    btn.addEventListener("click", function () {
-      var next = isLight() ? "dark" : "light";
-      root.dataset.theme = next;
-      try { localStorage.setItem("theme", next); } catch (e) {}
-      label(true); paint();
+    btns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var next = isLight() ? "dark" : "light";
+        root.dataset.theme = next;
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        label(true); paint();
+      });
     });
     // Volgt het systeem zolang er niets gekozen is.
     sysLight.addEventListener("change", function () { if (!root.dataset.theme) { label(true); paint(); } });

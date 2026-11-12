@@ -19,8 +19,8 @@ zonder test, ook als de test "met de hand, zo" is.
 branch die niemand meer ziet is waar werk twee keer gedaan wordt; dat is in Claudiclaude al
 eens met 23 branches misgegaan.
 
-**Scope.** De branches op de remote verwijderen. Op 12 september staan er vijf, allemaal
-zonder werk dat niet in `main` zit:
+**Scope.** De branches op de remote verwijderen. Op 12 november, na PW-13, staan er negen,
+allemaal zonder werk dat niet in `main` zit, en er is geen open PR:
 
 | Branch | Commits voor op `main` |
 |---|---|
@@ -28,12 +28,13 @@ zonder werk dat niet in `main` zit:
 | `claude/go-rjnrlq` | 0 |
 | `claude/project-next-steps-8i73w4` | 0 |
 | `claude/skills-overview-gvlckf` | 0 |
-| `claude/keen-carson-b19o5j` | 1, maar `git diff` tegen `main` is leeg (squash-merge van PR #3) |
+| `claude/eager-wright-hitcdo` | 0 |
+| `prijswacht-kaart` | 0, PR #5 is gemerged |
+| `claude/charming-edison-qtea2g` | 0, de vijfde kaart is met PW-13 meegegaan |
+| `claude/pensive-hawking-vcjlai` | 0, de branch van PW-13 |
+| `claude/keen-carson-b19o5j` | 1, een backlogcommit van 12 september die als squash in `main` zit; de inhoud is sindsdien verder bijgewerkt |
 
 Niets aan `main` zelf.
-
-Niet verwijderen: `prijswacht-kaart`, dat is PR #5 (de vierde kaart) en staat nog open.
-Acceptatiecriterium wordt dus: `git branch -r` toont `origin/main` en wat nog een open PR heeft.
 
 **Acceptatiecriteria.**
 - `git branch -r` toont `origin/main` en alleen branches met een open PR.
@@ -284,9 +285,9 @@ de drie nieuwe bestanden.
 
 ## PW-09 Vijfde kaart: klantwerk, anoniem
 
-**Status:** eigenaar. De kaart is gebouwd op de branch `claude/charming-edison-qtea2g` en
-staat onder voorwaarden (`docs/PORTFOLIO.md`). Hij gaat naar `main` zodra Mathijs het ene
-open punt daar heeft afgehandeld; daarna wordt dit **gebouwd**.
+**Status:** gebouwd. De kaart stond onder voorwaarden op de branch
+`claude/charming-edison-qtea2g`. Op 12 november meldde Mathijs het ene open punt als
+afgehandeld en is de kaart met het nieuwe ontwerp meegegaan naar `main` (PW-13).
 
 **Waarom.** Het eerste project hier dat voor iemand anders is gebouwd, en juist dat hoort
 op een portfolio. De eerste versie van de kaart noemde de klant bij naam, met haar
@@ -326,6 +327,10 @@ boven de prijzen. In CLAUDE.md de bestandslijst.
   consolefouten; alle vijf de schermafdrukken geladen op hun echte maten.
 
 **Afhankelijkheden.** PW-10 en PW-11: het oordeel van de portfolio-manager.
+
+**Aanvulling 12 november.** In het ontwerp van PW-13 heeft de kaart geen feitregels meer.
+Het label zegt "nog niet live", de alinea is ingekort en eindigt met waarom er geen naam
+en geen link staat. De feiten Boeken en Talen zijn vervallen.
 
 **Test.** `node tools/check.mjs` op 11 november: tien regels `ok` voor de pagina en drie
 voor de statische bestanden. De kaart bekeken op 1280px in donker en op 375px in licht. De
@@ -437,4 +442,70 @@ drie kloppen.
 
 ---
 
-Eerstvolgende vrije nummer: **PW-13**.
+## PW-13 Nieuw ontwerp: de index als rijen, met de letters uit de brandingsheet
+
+**Status:** gebouwd
+
+**Waarom.** De pagina was een stapel kaarten met elk een schermafdruk, drie feitregels en
+twee knoppen: veel kader om vijf links. Mathijs liet twee ontwerpen maken (canvas
+"prulwerk.nl redesign": v1 grid, v2 index) en koos op 12 november v2. Daarnaast stond de
+body nog op `system-ui`, terwijl de brandingsheet Instrument Sans en JetBrains Mono
+voorschrijft.
+
+**Scope.**
+- `index.html`: een kop tot 128px, en per project een rij met een label in mono, de naam,
+  één alinea, één knop en één tekstlink, met rechts de schermafdruk op een vlak met een
+  streep van 4px in het projectaccent. Een kleine footer met merkteken, wordmark en een
+  tweede themaknop. De feitregels zijn weg.
+- `fonts/`: Instrument Sans (één variabel bestand, 30 KB) en JetBrains Mono 400 (21 KB),
+  latin-subset, zelf gehost. `tools/check.mjs` verwacht nu vier fonts.
+- De vijfde kaart (PW-09) gaat mee.
+- CLAUDE.md en README: typografie, de accentregel en "Een project toevoegen". `lastmod`
+  in de sitemap naar 12 november.
+
+**Besloten.**
+- De teksten uit het ontwerp zijn niet overgenomen. Het ontwerp is van vóór PW-12 en
+  beloofde bij Prijswacht weer meldingen, bij Even Match een rating "waar je geen ruzie
+  over krijgt", en had bij Leto de pagina met de installatieknop als hoofdknop. De
+  alinea's zijn ingekort vanuit de teksten van PW-12 en de knoppen houden de volgorde van
+  PW-12.
+- Wat in de feitregel Status stond, staat nu in het label (Leto: nog niet te installeren;
+  Prijswacht: op uitnodiging; klantwerk: nog niet live) en in de alinea.
+- Drie afwijkingen van het ontwerp, omdat het alleen op 1280px is getekend. De kop krimpt
+  onder de 550px mee met de breedte: op de 52px uit het ontwerp past "Kleine dingen" niet
+  op een telefoon. Het vlak achter de schermafdruk heeft een verhouding in plaats van een
+  vaste hoogte van 380px, en de bijna vierkante schermafdruk van Even Match mag 380px
+  breed in plaats van 340px: anders hangt hij los in zijn vlak. De merktekens van Leto en
+  Prijswacht hebben een rand in de lijnkleur, want hun donkere vlak is even donker als de
+  pagina.
+- Paars en blauw staan nu ook buiten het merkteken, als streep. Dat sloot CLAUDE.md uit en
+  is daar aangepast: de streep is decoratie, geen tekst.
+- Het aantal in de hero en de nummering van de labels worden met de hand bijgehouden. Het
+  is een getal over deze pagina zelf, niet over een ander repo (PW-05), en er staat een
+  commentaarregel bij in `index.html`.
+- Instrument Sans is niet teruggesneden tot de gewichten die de pagina gebruikt: dat
+  scheelt 2,5 KB en maakt het bestand anders dan de bron.
+
+**Acceptatiecriteria.**
+- `node tools/check.mjs` groen: geen overflow van 320 tot 1600px in licht en donker, lege
+  console, geen externe host, vier fonts geladen, vijf schermafdrukken op hun echte maten.
+- Beide themaknoppen wisselen het thema, de labels van allebei, `theme-color` en de
+  opgeslagen keuze.
+- Elke schermafdruk loopt onderaan uit zijn vlak, op elke breedte.
+- Tekst haalt 4,5:1 op de pagina; elke link en knop is minstens 44px hoog.
+- Elke kaart heeft een oordeel van de portfolio-manager op de nieuwe tekst.
+
+**Afhankelijkheden.** PW-09, PW-10 en PW-12. PW-02 staat nog open: de skill
+`prulwerk-huisstijl` noemt de labelkleur met de oude waarden, de pagina houdt `#83837E`
+en `#6B6B66`.
+
+**Test.** 12 november. `node tools/check.mjs`: tien regels `ok` voor de pagina en drie
+voor de statische bestanden. In headless Chromium: een klik op de themaknop boven en
+onder, herladen, de tabvolgorde, en de maten van vlak en schermafdruk op 320, 375, 768,
+900, 1024, 1280 en 1600px. Bekeken op 1280px in licht en donker en op 375px in donker.
+VERDICT_PLACEHOLDER Niet gedaan: de live adressen, die zijn vanuit de cloudsessie niet
+bereikbaar.
+
+---
+
+Eerstvolgende vrije nummer: **PW-14**.

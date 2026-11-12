@@ -2,7 +2,7 @@
 //
 // Meet de indexpagina in een headless Chromium, op 320, 375, 768, 1024 en 1600px,
 // in licht en donker: geen horizontale overflow, lege console, geen mislukt of
-// extern verzoek, Archivo 700 en 900 geladen en niets anders, elke afbeelding
+// extern verzoek, de vier zelfgehoste fonts geladen en niets anders, elke afbeelding
 // met width en height gelijk aan de echte maten, en robots.txt, sitemap.xml en
 // og.png die een 200 geven. Draai dit na elke wijziging aan opmaak, kaarten of
 // afbeeldingen:
@@ -28,7 +28,7 @@ const PAGES = ['/'];
 const WIDTHS = [320, 375, 768, 1024, 1600];
 const THEMES = ['light', 'dark'];
 const STATIC = ['/robots.txt', '/sitemap.xml', '/og.png'];
-const FONTS = ['Archivo 700', 'Archivo 900'];
+const FONTS = ['Archivo 700', 'Archivo 900', 'Instrument Sans 400 700', 'JetBrains Mono 400'];
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -120,8 +120,7 @@ for (const path of PAGES) {
       const names = loaded.map((f) => f.replace(' loaded', ''));
       for (const want of FONTS) if (!names.includes(want)) problems.push(`font niet geladen: ${want}`);
       for (const f of r.fonts) if (!FONTS.some((w) => f.startsWith(w + ' ')) ) problems.push(`onverwachte font: ${f}`);
-      for (const f of r.fonts) if (f.startsWith('Archivo') && !f.endsWith(' loaded')) problems.push(`font niet geladen: ${f}`);
-      for (const i of r.images) if (!i.ok) problems.push(`afbeelding ${i.src}: echt ${i.natural}, attributen ${i.declared}`);
+            for (const i of r.images) if (!i.ok) problems.push(`afbeelding ${i.src}: echt ${i.natural}, attributen ${i.declared}`);
       if (problems.length) { failures++; console.log(`FOUT ${label}\n      ${problems.join('\n      ')}`); }
       else console.log(`ok   ${label}  scrollWidth ${r.scrollWidth} / innerWidth ${r.innerWidth}`);
       await page.close();
