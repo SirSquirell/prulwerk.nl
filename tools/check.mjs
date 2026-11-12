@@ -3,8 +3,9 @@
 // Meet de indexpagina in een headless Chromium, op 320, 375, 768, 1024 en 1600px,
 // in licht en donker: geen horizontale overflow, lege console, geen mislukt of
 // extern verzoek, de vier zelfgehoste fonts geladen en niets anders, elke afbeelding
-// met width en height gelijk aan de echte maten, en robots.txt, sitemap.xml en
-// og.png die een 200 geven. Draai dit na elke wijziging aan opmaak, kaarten of
+// met width en height gelijk aan de echte maten, het aantal in de hero en de
+// nummering gelijk aan het aantal projecten, en robots.txt, sitemap.xml en og.png
+// die een 200 geven. Draai dit na elke wijziging aan opmaak, kaarten of
 // afbeeldingen:
 //
 //   NODE_PATH=$(npm root -g) node tools/check.mjs
@@ -28,6 +29,7 @@ const PAGES = ['/'];
 const WIDTHS = [320, 375, 768, 1024, 1600];
 const THEMES = ['light', 'dark'];
 const STATIC = ['/robots.txt', '/sitemap.xml', '/og.png'];
+const COUNT = ['', 'Eén', 'Twee', 'Drie', 'Vier', 'Vijf', 'Zes', 'Zeven', 'Acht', 'Negen', 'Tien', 'Elf', 'Twaalf'];
 const FONTS = ['Archivo 700', 'Archivo 900', 'Instrument Sans 400 700', 'JetBrains Mono 400'];
 
 const MIME = {
@@ -97,6 +99,9 @@ for (const path of PAGES) {
           scrollWidth: document.documentElement.scrollWidth,
           innerWidth: window.innerWidth,
           fonts: [...document.fonts].map((f) => `${f.family.replace(/"/g, '')} ${f.weight} ${f.status}`),
+          projects: document.querySelectorAll('article.project').length,
+          numbers: [...document.querySelectorAll('article.project .eyebrow')].map((e) => e.textContent.trim().slice(0, 2)),
+          hero: document.querySelector('.hero p').textContent.trim(),
           images: [...document.images].map((i) => ({
             src: i.getAttribute('src'),
             ok: i.complete && i.naturalWidth === +i.getAttribute('width') && i.naturalHeight === +i.getAttribute('height'),
@@ -121,6 +126,11 @@ for (const path of PAGES) {
       for (const want of FONTS) if (!names.includes(want)) problems.push(`font niet geladen: ${want}`);
       for (const f of r.fonts) if (!FONTS.some((w) => f.startsWith(w + ' ')) ) problems.push(`onverwachte font: ${f}`);
             for (const i of r.images) if (!i.ok) problems.push(`afbeelding ${i.src}: echt ${i.natural}, attributen ${i.declared}`);
+      // Het aantal in de hero en de nummering van de labels worden met de hand bijgehouden.
+      const word = COUNT[r.projects];
+      if (!word || !r.hero.startsWith(word + ' ')) problems.push(`hero zegt "${r.hero}", er staan ${r.projects} projecten`);
+      const want = r.numbers.map((_, n) => String(n + 1).padStart(2, '0')).join(' ');
+      if (r.numbers.join(' ') !== want) problems.push(`nummering ${r.numbers.join(' ')}, verwacht ${want}`);
       if (problems.length) { failures++; console.log(`FOUT ${label}\n      ${problems.join('\n      ')}`); }
       else console.log(`ok   ${label}  scrollWidth ${r.scrollWidth} / innerWidth ${r.innerWidth}`);
       await page.close();

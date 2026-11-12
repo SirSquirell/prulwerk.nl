@@ -205,8 +205,10 @@ img{max-width:100%; display:block}
   border-radius:12px 12px 0 0; box-shadow:var(--shadow);
 }
 .shot:focus-visible{outline:2px solid var(--accent-line); outline-offset:3px}
-/* De schermafdruk van Even Match is bijna vierkant; op 340px vult hij het vlak niet. */
-.p-evenmatch .shot img{max-width:380px}
+/* De schermafdruk van Even Match is bijna vierkant en het oordeel staat onderaan. Dit
+   vlak volgt daarom de hoogte van de afbeelding: niets afgesneden, en geen gat eronder. */
+.p-evenmatch .shot{aspect-ratio:auto; max-height:none}
+.p-evenmatch .shot img{max-width:360px}
 .p-evenmatch{--stripe:var(--d-evenmatch-accent)}
 .p-asteria{--stripe:var(--asteria-star)}
 .p-leto{--stripe:var(--leto-accent)}
@@ -271,7 +273,7 @@ html.theme-anim .btn, html.theme-anim .tl{
   <section class="wrap hero rise d2">
     <h1>Kleine dingen<br>die <em>af</em> zijn.</h1>
     <!-- Het aantal is het aantal projecten hieronder. Komt er een bij, pas dit en de nummering aan. -->
-    <p>Vijf stuks. De rest staat op GitHub.</p>
+    <p>Vijf stuks, af genoeg om te delen. De rest staat op GitHub.</p>
   </section>
 
   <section class="wrap rise d3" aria-label="Projecten">

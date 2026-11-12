@@ -474,15 +474,20 @@ voorschrijft.
 - Drie afwijkingen van het ontwerp, omdat het alleen op 1280px is getekend. De kop krimpt
   onder de 550px mee met de breedte: op de 52px uit het ontwerp past "Kleine dingen" niet
   op een telefoon. Het vlak achter de schermafdruk heeft een verhouding in plaats van een
-  vaste hoogte van 380px, en de bijna vierkante schermafdruk van Even Match mag 380px
-  breed in plaats van 340px: anders hangt hij los in zijn vlak. De merktekens van Leto en
+  vaste hoogte van 380px, zodat de afbeelding er op elke breedte onderuit loopt. Bij Even
+  Match volgt het vlak de afbeelding: die is bijna vierkant, hing op 340px los in zijn
+  vlak, en het oordeel "net aan" staat helemaal onderaan. De merktekens van Leto en
   Prijswacht hebben een rand in de lijnkleur, want hun donkere vlak is even donker als de
   pagina.
 - Paars en blauw staan nu ook buiten het merkteken, als streep. Dat sloot CLAUDE.md uit en
   is daar aangepast: de streep is decoratie, geen tekst.
 - Het aantal in de hero en de nummering van de labels worden met de hand bijgehouden. Het
-  is een getal over deze pagina zelf, niet over een ander repo (PW-05), en er staat een
-  commentaarregel bij in `index.html`.
+  is een getal over deze pagina zelf, niet over een ander repo (PW-05). `tools/check.mjs`
+  vergelijkt beide met het aantal projecten.
+- De heroregel uit het ontwerp was "Vier stuks. De rest staat op GitHub." De
+  portfolio-manager merkte op dat een kaal aantal direct onder "die af zijn" meer belooft
+  dan drie van de vijf labels waarmaken. De regel is nu "Vijf stuks, af genoeg om te
+  delen. De rest staat op GitHub.", met de lat die al in de meta description staat.
 - Instrument Sans is niet teruggesneden tot de gewichten die de pagina gebruikt: dat
   scheelt 2,5 KB en maakt het bestand anders dan de bron.
 
@@ -491,7 +496,8 @@ voorschrijft.
   console, geen externe host, vier fonts geladen, vijf schermafdrukken op hun echte maten.
 - Beide themaknoppen wisselen het thema, de labels van allebei, `theme-color` en de
   opgeslagen keuze.
-- Elke schermafdruk loopt onderaan uit zijn vlak, op elke breedte.
+- Elke schermafdruk loopt onderaan uit zijn vlak of sluit erop aan, op elke breedte.
+- Het aantal in de hero en de nummering kloppen met het aantal projecten.
 - Tekst haalt 4,5:1 op de pagina; elke link en knop is minstens 44px hoog.
 - Elke kaart heeft een oordeel van de portfolio-manager op de nieuwe tekst.
 
@@ -503,8 +509,10 @@ en `#6B6B66`.
 voor de statische bestanden. In headless Chromium: een klik op de themaknop boven en
 onder, herladen, de tabvolgorde, en de maten van vlak en schermafdruk op 320, 375, 768,
 900, 1024, 1280 en 1600px. Bekeken op 1280px in licht en donker en op 375px in donker.
-VERDICT_PLACEHOLDER Niet gedaan: de live adressen, die zijn vanuit de cloudsessie niet
-bereikbaar.
+De portfolio-manager heeft de vijf nieuwe teksten nagelezen tegen de repo's van de
+projecten: niets blokkeert, en in geen van de vijf is een bewering bijgekomen of sterker
+geworden (`docs/PORTFOLIO.md`). Niet gedaan: de live adressen, die zijn vanuit de
+cloudsessie niet bereikbaar.
 
 ---
 
