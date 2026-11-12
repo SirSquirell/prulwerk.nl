@@ -40,6 +40,10 @@ geworden, en de voorbehouden waar de besluiten van 11 november op rustten staan 
 - De heroregel was in het ontwerp een kaal aantal onder "die af zijn". Op aanwijzen van de
   agent staat de lat er weer bij: "Vijf stuks, af genoeg om te delen."
 
+Na de derde ronde zijn de projecten vanaf 980px als twee lijsten naast elkaar gezet
+(PW-14). Dat is alleen opmaak: tekst, links en schermafdrukken zijn dezelfde, dus de agent
+is daarvoor niet opnieuw langs geweest.
+
 ## Even Match
 
 - [x] Tekst rechtgezet, besluit Mathijs: twee tegen twee, en de app zegt hoe ver de

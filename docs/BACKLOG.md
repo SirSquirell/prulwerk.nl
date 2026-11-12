@@ -516,4 +516,42 @@ cloudsessie niet bereikbaar.
 
 ---
 
-Eerstvolgende vrije nummer: **PW-14**.
+## PW-14 Twee lijsten naast elkaar
+
+**Status:** gebouwd
+
+**Waarom.** PW-13 zette vijf projecten onder elkaar als één lange rij. Mathijs wilde, na
+het live te hebben gezien, twee lijsten naast elkaar en liet de vorm aan het ontwerp.
+
+**Scope.** Alleen opmaak in `index.html`. Vanaf 980px een raster van twee kolommen: elk
+project is een kolom met de tekst boven en de schermafdruk eronder, en de vlakken in één
+rij staan op dezelfde hoogte. Tekst, links en schermafdrukken zijn ongewijzigd.
+
+**Besloten.**
+- Met beeld, niet alleen tekst. Twee kolommen zonder schermafdruk zijn korter, maar de
+  schermafdruk is het enige op de pagina dat laat zien hoe een project eruitziet.
+- De projecten lopen 01, 02 in de eerste rij, 03, 04 in de tweede. Geen indeling in twee
+  lijsten met een eigen kop: daar is niet om gevraagd, en het zou nieuwe tekst zijn.
+- Een oneven laatste project krijgt de volle breedte, in de rij-vorm van PW-13. Zo blijft
+  er geen gat naast, en het is nu toevallig het klantwerk, dat toch al anders is: geen
+  merk en geen links. Komt er een zesde bij, dan valt het vanzelf in het raster.
+- De grens ligt op 980px: smaller is een kolom te smal voor het vlak van 380px hoog met
+  de schermafdruk van Even Match erin. Daaronder blijft het de lijst van PW-13.
+
+**Acceptatiecriteria.**
+- `node tools/check.mjs` groen.
+- Op 980px en breder staan de vlakken in één rij op dezelfde hoogte en even hoog.
+- De uitsnede van de schermafdrukken is dezelfde als in PW-13: Even Match onafgesneden,
+  de overige vanaf de bovenkant.
+
+**Afhankelijkheden.** PW-13.
+
+**Test.** 12 november. `node tools/check.mjs`: tien regels `ok` en drie voor de statische
+bestanden. Maten van tekst, vlak en afbeelding op 320, 375, 768, 900, 979, 980, 1024, 1280
+en 1600px. Bekeken op 1280px in donker en licht. De portfolio-manager is niet opnieuw
+langs geweest: aan tekst, links en schermafdrukken is niets veranderd (`git diff` op de
+vijf `<article>`-blokken is leeg).
+
+---
+
+Eerstvolgende vrije nummer: **PW-15**.

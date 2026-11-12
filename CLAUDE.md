@@ -60,6 +60,8 @@ Alle drie zelf gehost; de pagina doet geen verzoek naar een andere host.
 Een kaart is sinds PW-13 een rij: label, naam, één alinea en twee links, met rechts de
 schermafdruk op een vlak in de tweede kaartlaag. De oude kaart met drie feitregels bestaat
 niet meer; wat een bezoeker moet weten over de status staat in het label of in de alinea.
+Vanaf 980px staan de projecten als twee lijsten naast elkaar (PW-14), met de schermafdruk
+onder de tekst; een oneven laatste project krijgt de volle breedte als rij.
 
 Projecten houden hun eigen accent binnen hun eigen kaart, op twee plekken: in het
 merkteken en als streep van 4px boven de schermafdruk. Even Match cyaan `#00D9F5`,
